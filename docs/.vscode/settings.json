@@ -1,0 +1,15 @@
+{
+  "files.exclude": {
+    "**/.sass-cache/": true,
+    "**/_site/": true
+  },
+  "files.associations": {
+    "*.html": "liquid"
+  },
+  "search.exclude": {
+    "**/.sass-cache/": true,
+    "_site/**": true,
+    ".vscode/**": true,
+    "*.lock": true
+  }
+}
