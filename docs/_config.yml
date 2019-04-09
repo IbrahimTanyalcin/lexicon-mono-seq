@@ -3,7 +3,7 @@ logo: /images/example5.gif
 image: /images/example5.gif
 description: LexiconMonoSeq, DOM Text based MSA visualization written in Javascript
 show_downloads: true
-google_analytics:UA-105632327-1
+google_analytics: UA-105632327-1
 theme: jekyll-theme-minimal
 url: https://ibrahimtanyalcin.github.io/lexicon-mono-seq/
 author: 
