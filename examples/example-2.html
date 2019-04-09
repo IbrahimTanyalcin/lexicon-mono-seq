@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta name="keywords" content="Lexicon,LexiconMonoSeq,Data,Visualization,Javascript">
+<meta name="author" content="Ibrahim Tanyalcin">
+<meta property="og:title" content="LexiconMonoSeq">
+<meta property="og:description" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta property="og:image" content="//cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/logo.png">
+<meta property="og:url" content="//github.com/IbrahimTanyalcin/lexicon-mono-seq">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:site_name" content="LexiconMonoSeq">
+<meta name="twitter:image:alt" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta name="twitter:widgets:theme" content="light">
+<meta name="twitter:widgets:link-color" content="#55acee">
+<meta name="twitter:widgets:border-color" content="#55acee">
+<meta name="theme-color" content="#1e90ff">
+<title>LexiconMonoSeq</title>
+<style>
+	#test {
+		width:50vw;
+		height:50vh;
+		position:absolute;
+		margin:auto;
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+	}
+	#result {
+		width:75vw;
+		height:25vh;
+		position:absolute;
+		margin:auto;
+		top:40vh;
+		right:0;
+		left:0;
+		font-size:24px;
+		font-family:Consolas;
+		transition:background 1s ease;
+		background:transparent;
+		white-space:pre;
+		text-align:center;
+	}
+	#result.red {
+		transition:none;
+		background:red;
+	}
+	body {
+		margin:0px;
+		width:100vw;
+		height:100vh;
+		position:relative;
+	}
+</style>
+<body>
+	<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/lexiconMonoSeq.v0.15.9.js"></script>
+	<div id="test">
+	</div>
+	<div id="result">
+		Order should be:<br>
+	</div>
+	<script>
+		!function(){
+			//Declare an object whcih we can show
+			var obj = [
+					{
+						name: "Alphabet",
+						seq: "THIS IS SOME EXAMPLE TEXT",
+						type: "alphabet"
+					},
+					{
+						name: "Amino acid",
+						seq: "THIS IS DIFFERENT TYPE",
+						type: "aa"
+					},
+					{
+						name: "Alphabet",
+						seq: "THIS IS WIDER",
+						type: "alphabet",
+						charWidth:3
+					},
+					{
+						name: "Alphabet",
+						seq: "EVEN WIDER",
+						type: "alphabet",
+						charWidth:10
+					},
+					{
+						name: "DNA",
+						seq: "A - T - C - G",
+						type: "dna",
+						charWidth:3
+					}
+				],
+				result = document.getElementById("result");
+			//create a shuffle function, I'll use ES5
+			function shuffle(obj){
+				var l = obj.length,
+					i1 = Math.random() * l | 0,
+					i2 = Math.random() * l | 0,
+					placeholder;
+				placeholder = obj[i1];
+				obj[i1] = obj[i2];
+				obj[i2] = placeholder;
+				return shuffle;
+			}
+			//run infinite loop
+			function repeatShuffle(shuffle,obj){
+				var duration = 1000 + Math.random() * 4000,
+					start,
+					elapsed,
+					repeat = function(t){
+						if(!start){
+							result.className = "";
+						}
+						start = start || t;
+						elapsed = (t - start) / duration;
+						if(elapsed > 1) {
+							result.className = "red";
+							shuffle(obj)(obj);
+							//update, previous options are preserved
+							instance.update(obj);
+							result.textContent = "Order should be:\n" + obj.map(function(d){return d.seq + "\n";});
+							repeatShuffle(shuffle,obj);
+							return;
+						}
+						window.requestAnimationFrame(repeat);
+					};
+				window.requestAnimationFrame(repeat);
+			}
+			//start the loop
+			repeatShuffle(shuffle,obj);
+			//initial render
+			var instance = LexiconMonoSeq("#test",{parallelRendering:5}); //create instance
+			instance.update(obj,{durationPaint:500,duration:500});
+		}();
+	</script>
+</body>
+</html>

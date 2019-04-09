@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta name="keywords" content="Lexicon,LexiconMonoSeq,Data,Visualization,Javascript">
+<meta name="author" content="Ibrahim Tanyalcin">
+<meta property="og:title" content="LexiconMonoSeq">
+<meta property="og:description" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta property="og:image" content="//cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/logo.png">
+<meta property="og:url" content="//github.com/IbrahimTanyalcin/lexicon-mono-seq">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:site_name" content="LexiconMonoSeq">
+<meta name="twitter:image:alt" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta name="twitter:widgets:theme" content="light">
+<meta name="twitter:widgets:link-color" content="#55acee">
+<meta name="twitter:widgets:border-color" content="#55acee">
+<meta name="theme-color" content="#1e90ff">
+<title>LexiconMonoSeq</title>
+<style>
+	#test {
+		width:100vw;
+		height:100vh;
+		position:relative;
+	}
+	body {
+		margin:0px;
+	}
+</style>
+<body>
+	<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/lexiconMonoSeq.v0.15.9.js"></script>
+	<div id="test"></div>
+	<script>
+		!function(){
+			
+			var instance = window.instance = LexiconMonoSeq("#test",{parallelRendering:5}); //create instance
+			instance.displayPadding = 0.1; //default is 0.2
+			var obj = LexiconMonoSeq.createRuler(createUpdateObject(1000),true);//static method to attach ruler
+			
+			//Allow sequences to be created, then fire up 
+			setTimeout(function(){
+				instance.update(obj,{durationPaint:500});
+				//instance.detach();
+			},3000);
+			
+			/*HELPER FUNCTIONS*/
+			function generateRandomSeq(){
+				var x = {};
+				x.seq = "";
+				x.type = "aa";
+				x.name = instance.generateRandomString();
+				for(var i = 0,j = Object.keys(instance.colors[x.type]),l = j.length;i<10000;++i){
+					x.seq += j[Math.random() * l | 0];
+				}
+				return x;
+			}
+			function createUpdateObject(n){
+				var x = [];
+				for(var i = 0;i<n;++i){
+					x.push(generateRandomSeq())
+				}
+				return x;
+			}
+		}();
+	</script>
+</body>
+</html>

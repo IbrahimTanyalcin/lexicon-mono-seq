@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta name="keywords" content="Lexicon,LexiconMonoSeq,Data,Visualization,Javascript">
+<meta name="author" content="Ibrahim Tanyalcin">
+<meta property="og:title" content="LexiconMonoSeq">
+<meta property="og:description" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta property="og:image" content="//cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/logo.png">
+<meta property="og:url" content="//github.com/IbrahimTanyalcin/lexicon-mono-seq">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:site_name" content="LexiconMonoSeq">
+<meta name="twitter:image:alt" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta name="twitter:widgets:theme" content="light">
+<meta name="twitter:widgets:link-color" content="#55acee">
+<meta name="twitter:widgets:border-color" content="#55acee">
+<meta name="theme-color" content="#1e90ff">
+<title>LexiconMonoSeq</title>
+<style>
+	#test {
+		width:75vw;
+		height:25vh;
+		position:absolute;
+		margin:auto;
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+	}
+	body {
+		margin:0px;
+	}
+</style>
+<body>
+	<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/lexiconMonoSeq.v0.15.9.js"></script>
+	<div id="test"></div>
+	<script>
+		!function(){
+			var instance = window.instance = LexiconMonoSeq("#test",{parallelRendering:5}); //create instance
+			instance.displayPadding = 0.1; //default is 0.2
+			//Allow sequences to be created, then fire up 
+			instance.update(
+				LexiconMonoSeq.readClustal(
+					"CLUSTAL W (1.82) multiple sequence alignment\n"
+					+ "												\n"
+					+ "												\n"
+					+ "FOSB_MOUSE      MFQAFPGDYDSGSRCSSSPSAESQYLSSVDSFGSPPTAAASQECAGLGEMPGSFVPTVTA 60\n"
+					+ "FOSB_HUMAN      MFQAFPGDYDSGSRCSSSPSAESQYLSSVDSFGSPPTAAASQECAGLGEMPGSFVPTVTA 60\n"
+					+ "			  ************************************************************\n"
+					+ "																			\n"
+					+ "FOSB_MOUSE      ITTSQDLQWLVQPTLISSMAQSQGQPLASQPPAVDPYDMPGTSYSTPGLSAYSTGGASGS 120\n"
+					+ "FOSB_HUMAN      ITTSQDLQWLVQPTLISSMAQSQGQPLASQPPVVDPYDMPGTSYSTPGMSGYSSGGASGS 120\n"
+					+ "			  ********************************.***************:*.**:******\n"
+					+ "																			\n"
+					+ "FOSB_MOUSE      GGPSTSTTTSGPVSARPARARPRRPREETLTPEEEEKRRVRRERNKLAAAKCRNRRRELT 180\n"
+					+ "FOSB_HUMAN      GGPSTSGTTSGPGPARPARARPRRPREETLTPEEEEKRRVRRERNKLAAAKCRNRRRELT 180\n"
+					+ "			  ****** ***** .**********************************************\n"
+					+ "																			\n"
+					+ "FOSB_MOUSE      DRLQAETDQLEEEKAELESEIAELQKEKERLEFVLVAHKPGCKIPYEEGPGPGPLAEVRD 240\n"
+					+ "FOSB_HUMAN      DRLQAETDQLEEEKAELESEIAELQKEKERLEFVLVAHKPGCKIPYEEGPGPGPLAEVRD 240\n"
+					+ "			  ************************************************************\n"
+					+ "																			\n"
+					+ "FOSB_MOUSE      LPGSTSAKEDGFGWLLPPPPPPPLPFQSSRDAPPNLTASLFTHSEVQVLGDPFPVVSPSY 300\n"
+					+ "FOSB_HUMAN      LPGSAPAKEDGFSWLLPPPPPPPLPFQTSQDAPPNLTASLFTHSEVQVLGDPFPVVNPSY 300\n"
+					+ "			  ****:.******.**************:*:**************************.***\n"
+					+ "																			\n"
+					+ "FOSB_MOUSE      TSSFVLTCPEVSAFAGAQRTSGSEQPSDPLNSPSLLAL 338\n"
+					+ "FOSB_HUMAN      TSSFVLTCPEVSAFAGAQRTSGSDQPSDPLNSPSLLAL 338\n"
+					+ "			  ***********************:**************\n"
+				)
+			);
+		}();
+	</script>
+</body>
+</html>
