@@ -7,18 +7,18 @@ google_analytics: UA-105632327-1
 theme: jekyll-theme-minimal
 url: https://ibrahimtanyalcin.github.io/lexicon-mono-seq/
 author: 
-	twitter: ibrhmTanyalcin
+  twitter: ibrhmTanyalcin
 twitter: 
-	username: ibrhmTanyalcin
-	card: summary
+  username: ibrhmTanyalcin
+  card: summary
 plugins:
   - jekyll-seo-tag
   - jekyll-mentions
 jekyll-mentions:
-	base_url: https://twitter.com
+  base_url: https://twitter.com
 social:
-	name: Ibrahim Tanyalcin
-	links:
-		- https://twitter.com/ibrhmTanyalcin
-		- https://github.com/IbrahimTanyalcin
-		- https://www.linkedin.com/in/ibrahimtanyalcin/
+  name: Ibrahim Tanyalcin
+  links:
+    - https://twitter.com/ibrhmTanyalcin
+    - https://github.com/IbrahimTanyalcin
+    - https://www.linkedin.com/in/ibrahimtanyalcin/
