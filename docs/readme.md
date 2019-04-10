@@ -37,9 +37,9 @@ Include the tag either within `body` or `head`
 
 ### 1
 
-![example1](../images/example1.gif)
+![example1](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example1.gif)
 
-#### [See script](../examples/example-1.html)
+#### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-1.html)
 
 *LexiconMonoSeq* comes with static (directly attached to the main function) methods that allows you to attach a *ruler* to your object, it finds the longest sequence and adds a ruler either to top of bottom of your dataset:
 
@@ -56,17 +56,17 @@ The second argument above are additional options which you can pass to *LexiconM
 
 ### 2
 
-![example2](../images/example2.gif)
+![example2](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example2.gif)
 
-#### [See script](../examples/example-2.html)
+#### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-2.html)
 
 You do not have to instantiate a new version each time your object changes, you can repeteadly call <code>update</code> method to redraw sequences. Things to be removed/added/changed are arranged automatically.
 
 ### 3
 
-![example3](../images/example3.gif)
+![example3](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example3.gif)
 
-#### [See script](../examples/example-3.html)
+#### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-3.html)
 
 If you ever need to get coordinates and data from *LexiconMonoSeq*, you can pass the evet to its <code>getInfoFromEvent</code> method:
 
@@ -92,9 +92,9 @@ You can also use the <code>getInfoFromRect</code> method to receive sequences fr
 
 ### 4 
 
-![example4](../images/example4.gif)
+![example4](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example4.gif)
 
-#### [See script](../examples/example-4.html)
+#### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-4.html)
 
 You can automatically scroll to any horizontal/vertical position, for a dataset of 10000 letters length max and 1000 sequences:
 
@@ -105,9 +105,9 @@ Above would scroll to some random position along the map.
 
 ### 5
 
-![example5](../images/example5.gif)
+![example5](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example5.gif)
 
-#### [See script](../examples/example-5.html)
+#### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-5.html)
 
 You can always register new types using <code>registerType</code>:
 
@@ -128,9 +128,9 @@ instance.registerType(
 ```
 ### 6 
 
-![example6](../images/example6.gif)
+![example6](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example6.gif)
 
-#### [See script](../examples/example-6.html)
+#### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-6.html)
 
 You can also read clustal.wl files if you provide them to *LexiconMonoSeq* as a string:
 
