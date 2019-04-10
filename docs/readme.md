@@ -37,7 +37,7 @@ Include the tag either within `body` or `head`
 
 ### 1
 
-![example1](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example1.gif)
+![example1](../images/example1.gif)
 
 #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-1.html)
 
@@ -56,7 +56,7 @@ The second argument above are additional options which you can pass to *LexiconM
 
 ### 2
 
-![example2](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example2.gif)
+![example2](../images/example2.gif)
 
 #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-2.html)
 
@@ -64,7 +64,7 @@ You do not have to instantiate a new version each time your object changes, you 
 
 ### 3
 
-![example3](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example3.gif)
+![example3](../images/example3.gif)
 
 #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-3.html)
 
@@ -92,7 +92,7 @@ You can also use the <code>getInfoFromRect</code> method to receive sequences fr
 
 ### 4 
 
-![example4](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example4.gif)
+![example4](../images/example4.gif)
 
 #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-4.html)
 
@@ -105,7 +105,7 @@ Above would scroll to some random position along the map.
 
 ### 5
 
-![example5](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example5.gif)
+![example5](../images/example5.gif)
 
 #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-5.html)
 
@@ -128,7 +128,7 @@ instance.registerType(
 ```
 ### 6 
 
-![example6](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example6.gif)
+![example6](../images/example6.gif)
 
 #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-6.html)
 
