@@ -998,6 +998,27 @@
 			wrapper.scrollTop = sY - (yF - yI);
 			options && options.drag && options.drag.call(instance,e,options);
 		};
+		_LexiconMonoSeq.prototype.skipFrames = function(nFrames){
+			var that = this;
+			return {
+				then: function(f){
+					that.watchman(
+						that,
+						function(counter){
+							return !--counter.counter
+						},
+						function(){
+							f.call(that);
+						},
+						{counter: nFrames}
+					);
+					return that.skipFrames(1 + nFrames);
+				},
+				skipFrames: function(_nFrames){
+					return that.skipFrames(nFrames + _nFrames);
+				}
+			};
+		};
 		_LexiconMonoSeq.prototype.quirks = {
 			busy:false,
 			parent: _LexiconMonoSeq.prototype,

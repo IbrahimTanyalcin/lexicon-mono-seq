@@ -14,9 +14,16 @@
 <meta name="twitter:widgets:link-color" content="#55acee">
 <meta name="twitter:widgets:border-color" content="#55acee">
 <meta name="theme-color" content="#1e90ff">
-<link href="//db.onlinewebfonts.com/c/1db29588408eadbd4406aae9238555eb?family=Consolas" rel="stylesheet" type="text/css"/>
 <title>LexiconMonoSeq</title>
 <style>
+	@font-face {font-family: "Consolas";
+		src: url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.eot");
+		src: url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.eot?#iefix") format("embedded-opentype"),
+		url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.woff2") format("woff2"),
+		url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.woff") format("woff"),
+		url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.ttf") format("truetype"),
+		url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.svg#Consolas") format("svg");
+	}
 	#test {
 		width:75vw;
 		height:25vh;
@@ -32,14 +39,14 @@
 	}
 </style>
 <body>
-	<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/lexiconMonoSeq.v0.15.10.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/lexiconMonoSeq.v0.15.12.js"></script>
 	<div id="test"></div>
 	<script>
 		!function(){
 			var instance = window.instance = LexiconMonoSeq("#test",{parallelRendering:5}); //create instance
 			instance.displayPadding = 0.1; //default is 0.2
 			//Allow sequences to be created, then fire up 
-			instance.update(
+			instance.skipFrames(5).then(function(){this.update(
 				LexiconMonoSeq.readClustal(
 					"CLUSTAL W (1.82) multiple sequence alignment\n"
 					+ "												\n"
@@ -68,7 +75,7 @@
 					+ "FOSB_HUMAN      TSSFVLTCPEVSAFAGAQRTSGSDQPSDPLNSPSLLAL 338\n"
 					+ "			  ***********************:**************\n"
 				)
-			);
+			)});
 		}();
 	</script>
 </body>
