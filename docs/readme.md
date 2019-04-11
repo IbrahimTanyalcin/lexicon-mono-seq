@@ -29,7 +29,15 @@ LexiconMonoSeq(
 
 *LexiconMonoSeq* supports [*UMD*](https://github.com/umdjs/umd). Use a derivate of the below link, based on the version you want:
 
-`<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/lexiconMonoSeq.v0.15.9.js"></script>`
+`<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/lexiconMonoSeq.v0.15.10.js"></script>`
+
+Above link can change if a new release is published. You can try adding the repo version (0.15.10 etc.):
+
+`<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq@version/lexiconMonoSeq.v@version.js"></script>`
+
+Alternatively you can requests all versions from here:
+
+`<script src="https://distreau.com/lexicon-mono-seq/js/lexiconMonoSeq.v0.15.10.js"></script>`
 
 Include the tag either within `body` or `head`
 
@@ -39,7 +47,8 @@ Include the tag either within `body` or `head`
 
 ![example1](../images/example1.gif)
 
-#### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-1.html)
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-1.html)
+> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-1.html)
 
 *LexiconMonoSeq* comes with static (directly attached to the main function) methods that allows you to attach a *ruler* to your object, it finds the longest sequence and adds a ruler either to top of bottom of your dataset:
 
@@ -58,7 +67,8 @@ The second argument above are additional options which you can pass to *LexiconM
 
 ![example2](../images/example2.gif)
 
-#### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-2.html)
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-2.html)
+> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-2.html)
 
 You do not have to instantiate a new version each time your object changes, you can repeteadly call <code>update</code> method to redraw sequences. Things to be removed/added/changed are arranged automatically.
 
@@ -66,7 +76,8 @@ You do not have to instantiate a new version each time your object changes, you 
 
 ![example3](../images/example3.gif)
 
-#### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-3.html)
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-3.html)
+> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-3.html)
 
 If you ever need to get coordinates and data from *LexiconMonoSeq*, you can pass the evet to its <code>getInfoFromEvent</code> method:
 
@@ -94,7 +105,8 @@ You can also use the <code>getInfoFromRect</code> method to receive sequences fr
 
 ![example4](../images/example4.gif)
 
-#### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-4.html)
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-4.html)
+> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-4.html)
 
 You can automatically scroll to any horizontal/vertical position, for a dataset of 10000 letters length max and 1000 sequences:
 
@@ -107,7 +119,8 @@ Above would scroll to some random position along the map.
 
 ![example5](../images/example5.gif)
 
-#### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-5.html)
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-5.html)
+> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-5.html)
 
 You can always register new types using <code>registerType</code>:
 
@@ -130,7 +143,8 @@ instance.registerType(
 
 ![example6](../images/example6.gif)
 
-#### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-6.html)
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-6.html)
+> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-6.html)
 
 You can also read clustal.wl files if you provide them to *LexiconMonoSeq* as a string:
 
@@ -204,7 +218,7 @@ Below are a non-exhaustive list of methods that might be of use to the user.
 - `instance.getInfoFromRect` ( DOM Rect ) *// returns the minimal rectangle ofsequences that contain the given boundaries*
 - `instance.scrollToPos` ( *horizontalPos* [ , *verticalPos* [, *options* ] ] ) *// options can have keys ease and duration. Default ease is [{x:0.75,y:0},{x:0.25,y:1}]*
 - `instance.enableDrag` ( [ , options ] ) *// allows drag behavior, an options object can be passed with start, drag and end properties where each is a function to execute on dragStart, drag and dragEnd event. The functions have "this" point to the instance and have the current DOM event as the first argument. The second argument is the options Object itself*
-- `instance.disableDrag` *// disables drag behavior*
+- `instance.disableDrag` ( ) *// disables drag behavior*
 
 ## Properties
 
@@ -214,6 +228,12 @@ Some non-exhaustive list of properties
 - `instance.maxAllowedLabelLength` *// maximum label length in letters, overflowed part will be rendered in ellipsis (...)*
 - `instance.painters` *// returns array of painter objects as determined by the parallelRendering option while instantiating LexiconMonoSeq*
 - `painter.nodeLimit` *// each painter object has a default limit of 80 nodes to animate per duration. Remaining nodes will take turn*
+- `instance._trackHeight` *//Gives the height of 1 sequence in pixels. Recalculated on reDraw*
+- `instance._getMaxTrackLength` *//Returns an object with info about the longest sequence. Recalculated on reDraw*
+- `instance._getMaxDisplayableChars` *//Returns the maximum displayable characters. Recalculated on reDraw*
+- `instance._getMaxDisplayableSequences` *//Returns the max number of sequences that can be displayed. Recalculated on reDraw*
+- `instance._dragEnabled` *//Returns true if drag behavior is enabled, otherwise returns a falsey value* 
+
 
 ## Customizing CSS
 
