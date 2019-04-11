@@ -29,6 +29,7 @@
 			this.container = container;
 			this.toggleClass(container,"LexiconMonoSeqContainer",true);
 			this._state = "IDLE";
+			this._labels = true;
 			var painters = this.painters = Array.apply(null,Array((options && options.parallelRendering) || 1))
 				.map(function(d,i){return new this.Paint(this);},this);
 			painters._counter = 0;
@@ -51,6 +52,10 @@
 			this.ColorShiftRgba = new this.ColorShiftRgba(this);
 			this.update = function(arr,nOptions){
 				options = nOptions || options;
+				options 
+				&& (options.labels !== undefined)
+				&& ((this._labels = !!options.labels) || true)
+				&& this.toggleClass(this.wrapper,"labelsOff",!options.labels);
 				this.scrollLeftOffset = this.fontWidth * this.maxAllowedLabelLength;
 				this.divStyle.transform = "translate(" + this.scrollLeftOffset + "px,0px)"; 
 				this.source = arr;
@@ -91,9 +96,6 @@
 				&& (this.painters.forEach(function(d,i){
 					d.duration = options.durationPaint;
 				},this));
-				options 
-				&& (options.labels !== undefined)
-				&& this.toggleClass(this.wrapper,"labelsOff",!options.labels);
 				return this;
 			};
 			this.wrapper.addEventListener("scroll",this.repaintOnScroll(),false);
@@ -105,7 +107,7 @@
 		##############PROTO############
 		###############################
 		*/
-		_LexiconMonoSeq.prototype.scrollLeftOffset = 0;
+		_LexiconMonoSeq.prototype._scrollLeftOffset = 0;
 		_LexiconMonoSeq.prototype._50spaces = "                                                  ";
 		_LexiconMonoSeq.prototype.set = function(k,v){
 			this[k] = v;
@@ -524,6 +526,17 @@
 						} else if (v === "IDLE") {
 							this._state = v;
 							this.busyStyle.visibility = "hidden";
+						}
+					}
+				},
+				scrollLeftOffset:{
+					configurable: false,
+					get: function(){
+						return this._labels ? this._scrollLeftOffset : 0;
+					},
+					set: function(v){
+						if(this._labels) {
+							this._scrollLeftOffset = v;
 						}
 					}
 				},
