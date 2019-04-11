@@ -41,6 +41,30 @@ Alternatively you can requests all versions from here:
 
 Include the tag either within `body` or `head`
 
+## A word about the fonts
+
+*LexiconMonoSeq* works with [monospace fonts](https://en.wikipedia.org/wiki/Monospaced_font) only, since fixed width characters are desired for proper alignment. Nonetheless, due to vender differences in font rendering, a few millipixel shift is normal.
+
+You can use your custom monospace fonts, but make sure they are properly loaded before you create an instance. If the fonts are loaded later or you changed them, invoke the `reDraw` method of the instace to recalculate styles:
+
+```JavaScript
+instace.reDraw();
+```
+
+If you really wanna be on the safe side for both Mac and Windows, use *Courier New* font. 
+
+If you load your custom fonts with `@import`, `@font-face` or `link` etc., give a small break after you create an instance, to allow browser calculations to kick-in. This time is possibly vendor dependent and usually a tick (~17ms) is sufficient. So instead of:
+
+```JavaScript
+LexiconMonoSeq("#test",{parallelRendering:5}).update(yourDataSet,{durationPaint:500,duration:500})
+```
+Do this:
+
+```JavaScript
+LexiconMonoSeq("#test",{parallelRendering:5}).skipFrames(30).then(function(){this.update(yourDataSet,{durationPaint:500,duration:500})}).then(...
+```
+Above will skip 30 frames (considering 60 frames = 1 second) and then update, giving browser to correctly render the custom font.
+
 ## Examples
 
 ### 1
@@ -219,6 +243,20 @@ Below are a non-exhaustive list of methods that might be of use to the user.
 - `instance.scrollToPos` ( *horizontalPos* [ , *verticalPos* [, *options* ] ] ) *// options can have keys ease and duration. Default ease is [{x:0.75,y:0},{x:0.25,y:1}]*
 - `instance.enableDrag` ( [ , options ] ) *// allows drag behavior, an options object can be passed with start, drag and end properties where each is a function to execute on dragStart, drag and dragEnd event. The functions have "this" point to the instance and have the current DOM event as the first argument. The second argument is the options Object itself*
 - `instance.disableDrag` ( ) *// disables drag behavior*
+- `instance.skipFrames` ( *frameCount* ) *//Waits for specified amount of frames before executing the following thenable. It returns an object with 2 properties `then` and `skipFrames`. Function inside the thenable is executed with `this` pointing to the `instance` itself. This is usually used to delay update right after an instance is created, allowing CSS styles to kick in:
+```JavaScript
+    LexiconMonoSeq("#test",{parallelRendering:5})
+    .skipFrames(30)
+    .then(function(){
+        this.update(yourDataSet,{durationPaint:500,duration:500})
+    }).then(function(){
+        console.log(this)
+    }).skipFrames(5)
+    .then(function(){
+        console.log("done!");
+    })
+ ```
+ Above would first create an `instace`, wait half a second, then update with new data, then after 1 frame (~17ms) `console.log` the `instance` itself, wait another 5 frames and finaly log "done!".
 
 ## Properties
 
@@ -233,7 +271,7 @@ Some non-exhaustive list of properties
 - `instance._getMaxDisplayableChars` *//Returns the maximum displayable characters. Recalculated on reDraw*
 - `instance._getMaxDisplayableSequences` *//Returns the max number of sequences that can be displayed. Recalculated on reDraw*
 - `instance._dragEnabled` *//Returns true if drag behavior is enabled, otherwise returns a falsey value* 
-
+- `instance._labels` *//Returns whether labels are enabled or not*
 
 ## Customizing CSS
 
