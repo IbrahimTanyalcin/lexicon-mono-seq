@@ -10,6 +10,10 @@ layout: post
 
 LexiconMonoSeq is a multiple sequence alignment visualizer ([MSA](https://en.wikipedia.org/wiki/Multiple_sequence_alignment)) that works with *monospace* fonts. You can use this tool for showing any arbitrary number of strings as well. The library renders DOM Text asynchronously.
 
+## Dependencies
+
+None.
+
 ## Usage
 ```JavaScript
 LexiconMonoSeq(
