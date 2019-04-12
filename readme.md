@@ -4,6 +4,10 @@ layout: post
 ---
 
 # LexiconMonoSeq
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/72bacfc56cec45c686639e69f9bb7126)](https://www.codacy.com/app/IbrahimTanyalcin/lexicon-mono-seq?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=IbrahimTanyalcin/lexicon-mono-seq&amp;utm_campaign=Badge_Grade)
+[![DOI](https://zenodo.org/badge/179171317.svg)](https://zenodo.org/badge/latestdoi/179171317)
+
 LexiconMonoSeq is a multiple sequence alignment visualizer ([MSA](https://en.wikipedia.org/wiki/Multiple_sequence_alignment)) that works with *monospace* fonts. You can use this tool for showing any arbitrary number of strings as well. The library renders DOM Text asynchronously.
 
 ## Usage
@@ -69,7 +73,7 @@ Above will skip 30 frames (considering 60 frames = 1 second) and then update, gi
 
 ### 1
 
-![example1](../images/example1.gif)
+![example1](./images/example1.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-1.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-1.html)
@@ -89,7 +93,7 @@ The second argument above are additional options which you can pass to *LexiconM
 
 ### 2
 
-![example2](../images/example2.gif)
+![example2](./images/example2.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-2.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-2.html)
@@ -98,7 +102,7 @@ You do not have to instantiate a new version each time your object changes, you 
 
 ### 3
 
-![example3](../images/example3.gif)
+![example3](./images/example3.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-3.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-3.html)
@@ -127,7 +131,7 @@ You can also use the <code>getInfoFromRect</code> method to receive sequences fr
 
 ### 4 
 
-![example4](../images/example4.gif)
+![example4](./images/example4.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-4.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-4.html)
@@ -141,7 +145,7 @@ Above would scroll to some random position along the map.
 
 ### 5
 
-![example5](../images/example5.gif)
+![example5](./images/example5.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-5.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-5.html)
@@ -165,7 +169,7 @@ instance.registerType(
 ```
 ### 6 
 
-![example6](../images/example6.gif)
+![example6](./images/example6.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-6.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-6.html)

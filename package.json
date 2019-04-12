@@ -1,0 +1,37 @@
+{
+  "name": "lexicon-mono-seq",
+  "version": "0.15.12",
+  "description": "LexiconMonoSeq, DOM Text based MSA visualization written in Javascript",
+  "keywords": [
+    "visualization",
+    "svg",
+    "lexicon",
+    "interactive",
+    "mapping",
+    "javascript",
+    "biojs",
+    "bionode",
+	"performance",
+	"data",
+	"bioinformatics",
+	"biology"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IbrahimTanyalcin/lexicon-mono-seq.git"
+  },
+  "author": {
+    "name": "ibrahim Tanyalcin",
+    "url": "ibrahimtanyalcin.com",
+    "email": "tanyalcin.ibrahim@gmail.com"
+  },
+  "devDependencies": {
+    "eslint": "^4.3.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "uglify-js": "^3.0.28"
+  }
+}
