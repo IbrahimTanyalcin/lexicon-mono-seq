@@ -1,5 +1,5 @@
 ---
-title: 'Async Modules Supporting ES5 and ES6 with Control Flow'
+title: 'Lexicon-Mono-Seq, DOM Text Based Async MSA Viewer'
 tags:
  - ES5
  - async
