@@ -1,6 +1,6 @@
 {
   "name": "lexicon-mono-seq",
-  "version": "0.15.12",
+  "version": "0.15.13",
   "description": "LexiconMonoSeq, DOM Text based MSA visualization written in Javascript",
   "keywords": [
     "visualization",
@@ -11,10 +11,10 @@
     "javascript",
     "biojs",
     "bionode",
-	"performance",
-	"data",
-	"bioinformatics",
-	"biology"
+    "performance",
+    "data",
+    "bioinformatics",
+    "biology"
   ],
   "repository": {
     "type": "git",
