@@ -7,6 +7,8 @@ layout: post
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/72bacfc56cec45c686639e69f9bb7126)](https://www.codacy.com/app/IbrahimTanyalcin/lexicon-mono-seq?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=IbrahimTanyalcin/lexicon-mono-seq&amp;utm_campaign=Badge_Grade)
 [![DOI](https://zenodo.org/badge/179171317.svg)](https://zenodo.org/badge/latestdoi/179171317)
+[![DOI](https://joss.theoj.org/papers/9fbf126b501ad921825f755732450278/status.svg)](https://joss.theoj.org/papers/9fbf126b501ad921825f755732450278)
+![npm](https://img.shields.io/npm/v/lexicon-mono-seq.svg)
 
 LexiconMonoSeq is a multiple sequence alignment viewer ([MSA](https://en.wikipedia.org/wiki/Multiple_sequence_alignment)) that works with *monospace* fonts. You can use this tool for showing any arbitrary number of strings as well. The library renders DOM Text asynchronously.
 
