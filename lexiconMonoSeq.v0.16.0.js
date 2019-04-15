@@ -43,7 +43,7 @@
 			this.hidden.className = "LexiconMonoSeq hidden";
 			this.hidden.textContent = "A";
 			this.busy = this.wrapper.appendChild(document.createElement("div"));
-			this.busy.className = "LexiconMonoSeq busy";
+			this.busy.className = "LexiconMonoSeq busy custom";
 			this.busyStyle = this.busy.style;
 			this.busy.textContent = "\u23f3";
 			this.sequences = [];
@@ -751,8 +751,18 @@
 				getCurrentPosLeft: {
 					configurable:false,
 					get: function(){
-						var track = this.getMaxTrackLength;
-						return this.scrollLeft / track.width * track.sequenceLength * track.charWidth;
+						if (this._getCurrentPosLeft) {
+							return this._getCurrentPosLeft;
+						}
+						var that = this,
+							track = this.getMaxTrackLength;
+						window.requestAnimationFrame(function(){
+							delete that._getCurrentPosLeft;
+						});
+						return this._getCurrentPosLeft = {
+							posLeft: (this.scrollLeft - track.posOffsetTransform) / track.width * track.sequenceLength * track.charWidth,
+							posOffset: track.posOffset
+						};
 					}
 				},
 				getVisibleRangeVertical: {
@@ -803,6 +813,8 @@
 						w = s.options.svgWidthInPx;
 						this.div.style.width = w + "px";
 						return this._getMaxTrackLength = {
+							posOffset: s.posOffset,
+							posOffsetTransform: s.options.posOffsetTransform,
 							width: w,
 							charWidth:s.charWidth,
 							sequenceLength: s.seq.length
@@ -845,7 +857,8 @@
 			}
 			var rects = sequenceObj.rects,
 				range = rects.paintedRange,
-				offset = (point.x - slabRect.left + sequenceObj.options.transformXOffset) / slabRect.width * seq.length,
+				options = sequenceObj.options,
+				offset = (point.x - slabRect.left + options.transformXOffset - options.posOffsetTransform) / slabRect.width * seq.length,
 				rCharNumber = offset | 0,
 				charNumber = rCharNumber + range.start;
 			if(seq[rCharNumber] === undefined) {
@@ -1070,7 +1083,7 @@
 		*/
 		LexiconMonoSeq.createRuler = function (arr,inject,bottom){
 			var ruler = "",
-				charLength = Math.max.apply(null,arr.map(function(d,i){return d.seq.length * (d.charWidth || 1)})),
+				charLength = Math.max.apply(null,arr.map(function(d,i){return d.seq.length * (d.charWidth || 1) + (d.posOffset || 0)})),
 				tick = 1,
 				counter = 20,
 				pass = 0;
@@ -1233,6 +1246,7 @@
 				/*source:this, temporarily added later on update*/
 				.set("charWidth",seqObj.charWidth || 1)
 				.set("name",seqObj.name)
+				.set("posOffset",seqObj.posOffset || 0)
 				.set("isVisible",true);
 				
 			this.style.transform = "translate(" + (-1 * instance.viewportWidth) + "px,0px)";
@@ -1303,10 +1317,11 @@
 				visibleRange: {
 					configurable: false,
 					get:function(){
-						var pLeft = this.parent.getCurrentPosLeft,
+						var currentPosLeft = this.parent.getCurrentPosLeft,
+							pLeft = currentPosLeft.posLeft - (this.posOffset - currentPosLeft.posOffset),
 							charWidth = this.charWidth,
 							uLen = this.unitLength,
-							offset = -(pLeft/charWidth % 1),
+							offset = -(pLeft / charWidth % 1),
 							maxDisplayableChars = this.parent.getMaxDisplayableChars/charWidth,
 							start = pLeft/charWidth,
 							end = start + maxDisplayableChars;
@@ -1977,16 +1992,19 @@
 					d.charWidth = source.charWidth || 1;
 					d.type = source.type;
 					d.name = source.name;
+					d.posOffset = source.posOffset || 0;
 				}
 				var letterSpacingInChar = d.charWidth - 1,
 					letterSpacing = letterSpacingInChar * fontWidth,
 					svgWidthInUnits = d.unitLength * this.fontRatio,
 					svgWidthInPx = d.unitLength * fontWidth,
+					posOffsetTransform = d.posOffset * fontWidth,
 					s = d.style,
 					sTextDiv = d.styleTextDiv;
 				s.letterSpacing = letterSpacing + "px";
 				s.width = svgWidthInPx + "px";
 				d.styleSVG.width = svgWidthInPx + "px";
+				d.styleSVG.transform = posOffsetTransform ? "translate(" + posOffsetTransform + "px,0px)" : "none";
 				sTextDiv.letterSpacing = "normal";
 				d.rects.setViewBox(d.svg,{width: svgWidthInUnits});
 				return d.options = {
@@ -1995,7 +2013,8 @@
 					uC: d.charWidth * this.fontRatio,
 					target:d,
 					firstCall:false,
-					transformXOffset: letterSpacing/2,
+					posOffsetTransform: posOffsetTransform,
+					transformXOffset: posOffsetTransform + letterSpacing/2,
 					svgWidthInUnits: svgWidthInUnits,
 					svgWidthInPx: svgWidthInPx
 				};
@@ -2055,6 +2074,7 @@
 					"	height:100%;",
 					"	overflow:auto;",
 					"	font-size:16px;",
+					"	-webkit-overflow-scrolling:touch;",
 					"	font-family: Consolas"/*'Courier New', Monospace;"*/,
 					"}",
 					"div.LexiconMonoSeq.wrapper::-webkit-scrollbar-track {",
@@ -2180,7 +2200,7 @@
 		_LexiconMonoSeq.prototype.scrollToPos.methods = {
 			moveTo: function(n,nY,that,e,d,vW,vH,tL,tH){
 				var x = that.scrollLeft,
-					x_p = Math.max(0,n/(tL.sequenceLength * tL.charWidth) * tL.width - vW/2),
+					x_p = Math.max(0,n/(tL.sequenceLength * tL.charWidth + tL.posOffset) * (tL.width + tL.posOffsetTransform) - vW/2),
 					dx = (x_p - x),
 					y = that.wrapper.scrollTop,
 					y_p = typeof nY !== "number" ? y : Math.max(0, nY * tH - vH/2),

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta name="keywords" content="Lexicon,LexiconMonoSeq,Data,Visualization,Javascript">
+<meta name="author" content="Ibrahim Tanyalcin">
+<meta property="og:title" content="LexiconMonoSeq">
+<meta property="og:description" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta property="og:image" content="//cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/logo.gif">
+<meta property="og:url" content="//github.com/IbrahimTanyalcin/lexicon-mono-seq">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:site_name" content="LexiconMonoSeq">
+<meta name="twitter:image:alt" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta name="twitter:widgets:theme" content="light">
+<meta name="twitter:widgets:link-color" content="#55acee">
+<meta name="twitter:widgets:border-color" content="#55acee">
+<meta name="theme-color" content="#1e90ff">
+<title>LexiconMonoSeq</title>
+<style>
+	@font-face {font-family: "Consolas";
+		src: url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.eot");
+		src: url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.eot?#iefix") format("embedded-opentype"),
+		url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.woff2") format("woff2"),
+		url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.woff") format("woff"),
+		url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.ttf") format("truetype"),
+		url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.svg#Consolas") format("svg");
+	}
+	#test {
+		width:75vw;
+		height:25vh;
+		position:absolute;
+		margin:auto;
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+	}
+	body {
+		position:relative;
+		margin:0px;
+		width:100vw;
+		height:100vh;
+	}
+	#loading {
+		width:20vw;
+		height:20vh;
+		position:absolute;
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+		margin:auto;
+		font-size:16px;
+		font-family:Consolas;
+		text-align:center;
+		background:black;
+		color:White;
+		z-index:2;
+	}
+	button {
+		width:75vw;
+		height:20vh;
+		position:absolute;
+		top:5vh;
+		right:0;
+		left:0;
+		margin:auto;
+		font-size:20px;
+		font-family:Consolas;
+		text-align:center;
+		border:0px;
+		padding:0px;
+		border-radius:10px;
+		background:DodgerBlue;
+		color:white;
+		outline:none;
+		transition:background 1s ease;
+	}
+	button.inactive {
+		background:DarkSlateGray !important;
+	}
+	button:hover {
+		background:Teal;
+	}
+</style>
+<body>
+	<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq@0.16.0/lexiconMonoSeq.v0.16.0.js"></script>
+	<div id="test"></div>
+	<div id="loading">Sit tight! loading..</div>
+	<button>Load 0-1Mb</button>
+	<script>
+		!function(){
+			var instance = window.instance = LexiconMonoSeq("#test",{parallelRendering:5}), //create instance
+				button = document.getElementsByTagName("button")[0],
+				loading = document.getElementById("loading"),
+				fileNames = ["chrX.0M.1M.txt","chrX.1M.2M.txt"],
+				state = "inactive";
+			instance.displayPadding = 0.1; //default is 0.2
+			//Allow sequences to be created, then fire up 
+			var typeAA = instance.caveManCopy(instance.colors.aa),//deep copies the object
+				typeDNA = instance.caveManCopy(instance.colors.dna);
+			typeDNA.N = "#333333";
+			typeDNA.W = "#333333";
+			typeDNA.S = "#333333";
+			typeDNA.Y = "#333333";
+			typeDNA.R = "#333333";
+			typeAA["?"] = "#333333";
+			typeAA["X"] = "#333333";
+			instance.registerType("aa",typeAA);
+			instance.registerType("dna",typeDNA);
+			function loadData(fileName){
+				if (fileName === "chrX.0M.1M.txt") {
+					button.textContent = "Load 1-2Mb";
+				} else {
+					button.textContent = "Load 0-1Mb";
+				}
+				fileNames.push(fileNames.shift());
+				loading.style.visibility = "visible";
+				button.className = "inactive";
+				state = "inactive";
+				var req = new XMLHttpRequest();
+				req.responseType = "json";
+				req.open("GET","//distreau.com/lexicon-mono-seq/datasets/" + fileName,true);
+				req.onload = function(e){
+					button.className = "";
+					state = "active";
+					loading.style.visibility = "hidden";
+					instance.update(LexiconMonoSeq.createRuler(this.response,true));
+				};
+				req.send();
+			};
+			button.onclick = function(){
+				if(state === "inactive"){return}
+				loadData(fileNames[0]);
+			};
+			instance.skipFrames(90).then(function(){loadData(fileNames[0]);});
+		}();
+	</script>
+</body>
+</html>

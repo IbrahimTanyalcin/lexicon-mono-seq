@@ -9,12 +9,27 @@ layout: post
 [![DOI](https://zenodo.org/badge/179171317.svg)](https://zenodo.org/badge/latestdoi/179171317)
 [![DOI](https://joss.theoj.org/papers/9fbf126b501ad921825f755732450278/status.svg)](https://joss.theoj.org/papers/9fbf126b501ad921825f755732450278)
 ![npm](https://img.shields.io/npm/v/lexicon-mono-seq.svg)
+![npm](https://img.shields.io/npm/dm/lexicon-mono-seq.svg)
 
-LexiconMonoSeq is a multiple sequence alignment viewer ([MSA](https://en.wikipedia.org/wiki/Multiple_sequence_alignment)) that works with *monospace* fonts. You can use this tool for showing any arbitrary number of strings as well. The library renders DOM Text asynchronously.
+*LexiconMonoSeq* is a multiple sequence alignment viewer ([MSA](https://en.wikipedia.org/wiki/Multiple_sequence_alignment)) that works with *monospace* fonts. You can use this tool for showing any arbitrary number of strings as well. The library renders DOM Text asynchronously.
 
 ## Dependencies
 
 None.
+
+## Tool's purpose
+
+In truth this small script is a ascii animation framework that comes with performance baked in. It has its own cached easing functions and recycles batch of DOM elements to keep painting and rendering as short as possible. Possible use cases for:
+
+- **Bioinformatics** : displaying long (even > 1Mb) sequences with frame-shifts. Aligning DNA/amino acids etc. 
+
+![example7](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example7.gif)
+
+- **Creative** : ascii glitch art etc.
+
+![example8](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example8.gif)
+
+
 
 ## Usage
 ```JavaScript
@@ -24,9 +39,10 @@ LexiconMonoSeq(
 ).update([
     {
         name:"string1",
-        charWidth:2,
+        charWidth:2, //OPTIONAL
         seq:"SOMETEXT",
-        type:"alphabet"
+        type:"alphabet",
+        posOffset: 5 //OPTIONAL
     },
     {
         name:"string2",
@@ -39,17 +55,21 @@ LexiconMonoSeq(
 
 *LexiconMonoSeq* supports [*UMD*](https://github.com/umdjs/umd). Use a derivate of the below link, based on the version you want:
 
-`<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/lexiconMonoSeq.v0.15.10.js"></script>`
+`<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/lexiconMonoSeq.v0.16.0.js"></script>`
 
-Above link can change if a new release is published. You can try adding the repo version (0.15.10 etc.):
+Above link can change if a new release is published. You can try adding the repo version (0.16.0 etc.):
 
-`<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq@version/lexiconMonoSeq.v@version.js"></script>`
+`<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq@[version]/lexiconMonoSeq.v[version].js"></script>`
+
+For example:
+
+`<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq@0.16.0/lexiconMonoSeq.v0.16.0.js"></script>`
 
 Alternatively you can requests all versions from here:
 
-`<script src="https://distreau.com/lexicon-mono-seq/js/lexiconMonoSeq.v0.15.10.js"></script>`
+`<script src="https://distreau.com/lexicon-mono-seq/js/lexiconMonoSeq.v0.16.0.js"></script>`
 
-Include the tag either within `body` or `head`
+Include the tag either within `body` or `head`, synchronous or asynchronous, according to your page's desing needs.
 
 ## A word about the fonts
 
@@ -185,6 +205,25 @@ You can also read clustal.wl files if you provide them to *LexiconMonoSeq* as a 
 ```JavaScript
 instance.update(LexiconMonoSeq.readClustal(String))
 ```
+### 7
+
+![example7](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example7.gif)
+
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-7.html)
+> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-7.html)
+
+Passing the optional `posOffset` shifts a given sequence to the right 1 unit char. This means if a sequence has `charWidth` of 10 and `posOffset` is 1, it is shifted 0.1 chars compared to its `charWidth`. This allows you to control track position of which you can't achive by adding spaces to the left. This property is useful if you are going to align DNA with amino acids or tracks with different `charWidth`.
+
+The above example displays the first million bases of chromosomeX with 3 possible frames of amino acids.
+
+### 8
+
+![example8](https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/images/example8.gif)
+
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-8.html)
+> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-8.html)
+
+ASCII glitch art
 
 ## Creating an instance
 
@@ -302,6 +341,10 @@ div.LexiconMonoSeq.wrapper.custom {
 ## Extending LexiconMonoSeq
 
 The inner constructor is not exposed, if you want to attach new methods directly attach it on the `LexiconMonoSeq`.
+
+## TODO(s)
+
+- Currently the `fontWidth` getter/setter returns live values from the `Range` object, which changes with `CSS transform`. This causes applet svgs to missalign when parent is transformed ( for instance, if parent is scaled by 0.5, svgs get scaled by 0.25 because `fontWidth` returns half the values ). One solution could be to add a new getter/setter that multiplies transformation matrix with its inverse.
 
 ## Questions
 
