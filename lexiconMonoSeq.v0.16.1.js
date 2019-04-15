@@ -6,13 +6,13 @@
 		} else {
 			root.LexiconMonoSeq = factory(root,root.document);
 		}
-	}(this, function(window,document) {
+	}(this, function($window,$document) {
 		function LexiconMonoSeq(container,options){
 			container = typeof container === "string" 
-				? document.querySelector(container) 
+				? $document.querySelector(container) 
 				: container.nodeType && container.nodeType === 1
 					? container
-					: document.body;
+					: $document.body;
 			return new _LexiconMonoSeq(container,options);
 		};
 		function _LexiconMonoSeq(container,options){
@@ -20,10 +20,10 @@
 				options && (this.textRendering = options.textRendering);
 				options && (this.fontKerning = options.fontKerning);
 				options && (this.webkitFontSmoothing = options.webkitFontSmoothing);
-				var style = document.createElement("style");
+				var style = $document.createElement("style");
 				style.textContent = this.Style.string(this);
 				style.setAttribute("data-name","LexiconMonoSeqStyle");
-				document.head.appendChild(style);
+				$document.head.appendChild(style);
 				this.constructor.prototype.__defaultStyleApplied = true;
 			}
 			this.container = container;
@@ -34,15 +34,15 @@
 				.map(function(d,i){return new this.Paint(this);},this);
 			painters._counter = 0;
 			painters._length = painters.length;
-			this.wrapper = document.createElement("div");
+			this.wrapper = $document.createElement("div");
 			this.wrapper.className = "LexiconMonoSeq wrapper custom";
-			this.div = this.wrapper.appendChild(document.createElement("div"));
+			this.div = this.wrapper.appendChild($document.createElement("div"));
 			this.div.className = "LexiconMonoSeq main custom";
 			this.divStyle = this.div.style;
-			this.hidden = this.wrapper.appendChild(document.createElement("div"));
+			this.hidden = this.wrapper.appendChild($document.createElement("div"));
 			this.hidden.className = "LexiconMonoSeq hidden";
 			this.hidden.textContent = "A";
-			this.busy = this.wrapper.appendChild(document.createElement("div"));
+			this.busy = this.wrapper.appendChild($document.createElement("div"));
 			this.busy.className = "LexiconMonoSeq busy custom";
 			this.busyStyle = this.busy.style;
 			this.busy.textContent = "\u23f3";
@@ -487,7 +487,7 @@
 			return arr;
 		};
 		_LexiconMonoSeq.prototype.SVG = function(container){
-			var svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+			var svg = $document.createElementNS("http://www.w3.org/2000/svg","svg");
 			svg.setAttribute("viewBox","0 0 1 1");
 			svg.setAttribute("preserveAspectRatio","none");
 			if (container) {
@@ -572,12 +572,12 @@
 							return this._fontRect;
 						}
 						var that = this,
-							r = document.createRange(),
+							r = $document.createRange(),
 							t = this.hidden.firstChild,
 							l = t.length;
 						r.setStart(t,0);
 						r.setEnd(t,l);
-						window.requestAnimationFrame(function(){
+						$window.requestAnimationFrame(function(){
 							delete that._fontRect;
 							r.detach && r.detach();
 						});
@@ -604,7 +604,7 @@
 							return this._fontRatio;
 						}
 						var that = this;
-						window.requestAnimationFrame(function(){
+						$window.requestAnimationFrame(function(){
 							delete that._fontRatio;
 						});
 						return this._fontRatio = this.fontWidth/this.fontHeight;
@@ -617,7 +617,7 @@
 							return this._containerRect;
 						}
 						var that = this;
-						window.requestAnimationFrame(function(){
+						$window.requestAnimationFrame(function(){
 							delete that._containerRect;
 						});
 						return this._containerRect = this.container.getBoundingClientRect();
@@ -636,7 +636,7 @@
 							return this._mainRect;
 						}
 						var that = this;
-						window.requestAnimationFrame(function(){
+						$window.requestAnimationFrame(function(){
 							delete that._mainRect;
 						});
 						return this._mainRect = this.div.getBoundingClientRect();
@@ -655,7 +655,7 @@
 							return this._viewportRect;
 						}
 						var that = this;
-						window.requestAnimationFrame(function(){
+						$window.requestAnimationFrame(function(){
 							delete that._viewportRect;
 						});
 						return this._viewportRect = this.wrapper.getBoundingClientRect();
@@ -693,10 +693,10 @@
 							return this._innerWidth;
 						}
 						var that = this;
-						window.requestAnimationFrame(function(){
+						$window.requestAnimationFrame(function(){
 							delete that._innerWidth;
 						});
-						return this._innerWidth = Math.max(document.documentElement.clientWidth,window.innerWidth);
+						return this._innerWidth = Math.max($document.documentElement.clientWidth,$window.innerWidth);
 					}
 				},
 				getScreenWidth: {
@@ -712,10 +712,10 @@
 							return this._innerHeight;
 						}
 						var that = this;
-						window.requestAnimationFrame(function(){
+						$window.requestAnimationFrame(function(){
 							delete that._innerHeight;
 						});
-						return this._innerHeight = Math.max(document.documentElement.clientHeight,window.innerHeight);
+						return this._innerHeight = Math.max($document.documentElement.clientHeight,$window.innerHeight);
 					}
 				},
 				getScreenHeight: {
@@ -756,7 +756,7 @@
 						}
 						var that = this,
 							track = this.getMaxTrackLength;
-						window.requestAnimationFrame(function(){
+						$window.requestAnimationFrame(function(){
 							delete that._getCurrentPosLeft;
 						});
 						return this._getCurrentPosLeft = {
@@ -779,7 +779,7 @@
 							vRange = {start:0,end:0},
 							l = this.sequences.length,
 							maxDisplayableSequences = this.getMaxDisplayableSequences;
-						window.requestAnimationFrame(function(){
+						$window.requestAnimationFrame(function(){
 							delete that._getVisibleRangeVertical;
 						});
 						if(bot <= top) {
@@ -956,7 +956,7 @@
 			return wrapper._startDrag = function(e){
 				if(busy){return}
 				busy = true;
-				window.requestAnimationFrame(function(){
+				$window.requestAnimationFrame(function(){
 					busy = false;
 				});
 				if(wrapper._dragging){return};
@@ -983,14 +983,14 @@
 					options && options.end && options.end.call(instance,e,options);
 				};
 			instance.quirks.disableScroll();
-			window.addEventListener("resize",refReset,false);
-			window.addEventListener("mouseup",refReset,false);
-			window.addEventListener("touchend",refReset,false);
+			$window.addEventListener("resize",refReset,false);
+			$window.addEventListener("mouseup",refReset,false);
+			$window.addEventListener("touchend",refReset,false);
 			if (e.type === "touchstart") {
 				e.preventDefault();
-				window.addEventListener("touchmove",refMove,instance.quirks.passiveSupported ? {capture:false, passive:false} : false);
+				$window.addEventListener("touchmove",refMove,instance.quirks.passiveSupported ? {capture:false, passive:false} : false);
 			} else {
-				window.addEventListener("mousemove",refMove,false);
+				$window.addEventListener("mousemove",refMove,false);
 			}
 		};
 		_LexiconMonoSeq.prototype.drag = function (instance,container,wrapper,xI,yI,sX,sY,options,e) {// this refers to empty object pointer
@@ -1004,7 +1004,7 @@
 				yF = e.clientY !== undefined ? e.clientY : e.changedTouches[0].clientY,
 				that = this;
 			this.busy = true;
-			window.requestAnimationFrame(function(){
+			$window.requestAnimationFrame(function(){
 				that.busy = false;
 			});
 			instance.scrollLeft = sX - (xF - xI);
@@ -1039,14 +1039,14 @@
 			scrollDisabled: false,
 			disableScroll:function(){
 				if(this.scrollDisabled){return}
-				this.parent.toggleClass(document.body,"lock-scroll",true);
-				document.body.addEventListener("touchmove",this.disableScrollFunction,this.passiveSupported ? {capture:false, passive:false} : false);
+				this.parent.toggleClass($document.body,"lock-scroll",true);
+				$document.body.addEventListener("touchmove",this.disableScrollFunction,this.passiveSupported ? {capture:false, passive:false} : false);
 				this.scrollDisabled = true;
 			},
 			enableScroll:function(){
 				if(!this.scrollDisabled){return}
-				this.parent.toggleClass(document.body,"lock-scroll",false);
-				document.body.removeEventListener("touchmove",this.disableScrollFunction, this.passiveSupported ? {capture:false, passive:false} : false);
+				this.parent.toggleClass($document.body,"lock-scroll",false);
+				$document.body.removeEventListener("touchmove",this.disableScrollFunction, this.passiveSupported ? {capture:false, passive:false} : false);
 				this.scrollDisabled = false;
 			}
 		};
@@ -1057,10 +1057,10 @@
 						quirks.passiveSupported = true;
 					}
 				});
-			window.addEventListener("lexiconMonoSeqPassiveTest",null,options);
+			$window.addEventListener("lexiconMonoSeqPassiveTest",null,options);
 			quirks.disableScrollFunction = function(e){
 				if(quirks.busy){return}
-				window.requestAnimationFrame(function(){
+				$window.requestAnimationFrame(function(){
 					quirks.busy = false;
 				});
 				quirks.busy = true;
@@ -1195,7 +1195,7 @@
 		_LexiconMonoSeq.prototype.AnimLedger.prototype.cancelFrames = function(){
 			this.getCancelable()
 			.forEach(function(d,i){
-				window.cancelAnimationFrame(this[d]);
+				$window.cancelAnimationFrame(this[d]);
 				this[d.slice(1)] = undefined;
 			},this);
 			return this;
@@ -1223,10 +1223,10 @@
 		*/
 		_LexiconMonoSeq.prototype.Sequence = function (seqObj,instance){
 			var that = this,
-				div = document.createElement("div"),
+				div = $document.createElement("div"),
 				svg = this.svg = instance.SVG(div),
-				textDiv = div.appendChild(document.createElement("div")),
-				textSlab = div.appendChild(document.createElement("div"));
+				textDiv = div.appendChild($document.createElement("div")),
+				textSlab = div.appendChild($document.createElement("div"));
 				
 			this
 				.set("rm",false)
@@ -1271,7 +1271,7 @@
 							return this._trackRect;
 						}
 						var that = this;
-						window.requestAnimationFrame(function(){
+						$window.requestAnimationFrame(function(){
 							delete that._trackRect;
 						});
 						return this._trackRect = this.svg.getBoundingClientRect();
@@ -1284,7 +1284,7 @@
 							return this._slabRect;
 						}
 						var that = this;
-						window.requestAnimationFrame(function(){
+						$window.requestAnimationFrame(function(){
 							delete that._slabRect;
 						});
 						return this._slabRect = this.textSlab.getBoundingClientRect();
@@ -1452,7 +1452,7 @@
 			this.stopColors = [];
 			this.stopOpacities = [];
 			this.paintedRange = {start:-1,end:-1};
-			this.fragment = document.createDocumentFragment();
+			this.fragment = $document.createDocumentFragment();
 			this.depot = new this.Depot(this);
 		};
 		_LexiconMonoSeq.prototype.Rect.prototype.getVal = function(n,v) {
@@ -1480,7 +1480,7 @@
 			return this;
 		};
 		_LexiconMonoSeq.prototype.Rect.prototype.rect = (function(){
-			return this.setAttr(document.createElementNS("http://www.w3.org/2000/svg","rect"),"fill","#ffffff")
+			return this.setAttr($document.createElementNS("http://www.w3.org/2000/svg","rect"),"fill","#ffffff")
 			.setAttr("fill-opacity",0)
 			/*.setAttr("stroke-width",0)*/
 			.setVal("width",1)
@@ -1726,7 +1726,7 @@
 						configurable:false,
 						writable: false,
 						value: function(id,doNotResume){
-							that.frames[id] && window.cancelAnimationFrame(that.frames[id]);
+							that.frames[id] && $window.cancelAnimationFrame(that.frames[id]);
 							delete that.frames[id];
 							if(!doNotResume && !Object.keys(that.frames).length && that.active){
 								this._resumeTask();
@@ -1851,10 +1851,10 @@
 						}
 						return;
 					}
-					that.frames[rects.id] = window.requestAnimationFrame(recurse);
+					that.frames[rects.id] = $window.requestAnimationFrame(recurse);
 				},
 				task = function(){
-					that.frames[rects.id] = window.requestAnimationFrame(recurse);
+					that.frames[rects.id] = $window.requestAnimationFrame(recurse);
 				};
 			if(taskLet._firstTask){
 				var depotTransfered = false,
@@ -1889,7 +1889,7 @@
 		###############################
 		*/
 		_LexiconMonoSeq.prototype.toggleLabels = function(show,options){
-			window.cancelAnimationFrame(this.currentAnimationFrame.l);
+			$window.cancelAnimationFrame(this.currentAnimationFrame.l);
 			this.state = "ANIM";
 			var that = this,
 				startTime,
@@ -1932,9 +1932,9 @@
 					++that.scrollLeft;//trigger repaint
 					return;
 				}
-				that.currentAnimationFrame.l = window.requestAnimationFrame(toggle);
+				that.currentAnimationFrame.l = $window.requestAnimationFrame(toggle);
 			}
-			this.currentAnimationFrame.l = window.requestAnimationFrame(toggle);
+			this.currentAnimationFrame.l = $window.requestAnimationFrame(toggle);
 			return this;
 		};
 		_LexiconMonoSeq.prototype.removeSequences = function(arr,ledger){
@@ -1954,9 +1954,9 @@
 					that.currentAnimationFrame.r = undefined;
 					return;
 				}
-				that.currentAnimationFrame.r = window.requestAnimationFrame(remove);
+				that.currentAnimationFrame.r = $window.requestAnimationFrame(remove);
 			}
-			this.currentAnimationFrame.r = window.requestAnimationFrame(remove);
+			this.currentAnimationFrame.r = $window.requestAnimationFrame(remove);
 			return this;
 		};
 		_LexiconMonoSeq.prototype.appendSequences = function(arr,ledger){
@@ -1976,9 +1976,9 @@
 				if(t >= 1){
 					return;
 				}
-				window.requestAnimationFrame(append);
+				$window.requestAnimationFrame(append);
 			}
-			window.requestAnimationFrame(append);
+			$window.requestAnimationFrame(append);
 		};
 		_LexiconMonoSeq.prototype.updateSequences = function(arr,ledger) {
 			var that = this,
@@ -2041,9 +2041,9 @@
 					}
 					return;
 				}
-				that.currentAnimationFrame[frameKey] = window.requestAnimationFrame(update);
+				that.currentAnimationFrame[frameKey] = $window.requestAnimationFrame(update);
 			}
-			this.currentAnimationFrame[frameKey] = window.requestAnimationFrame(update);
+			this.currentAnimationFrame[frameKey] = $window.requestAnimationFrame(update);
 			return this;
 		};
 		/*
@@ -2173,7 +2173,7 @@
 		###############################
 		*/
 		_LexiconMonoSeq.prototype.scrollToPos = function(n,nY,options){
-			window.cancelAnimationFrame(this.currentAnimationFrame.s);
+			$window.cancelAnimationFrame(this.currentAnimationFrame.s);
 			var that = this,
 				e = (options && options.ease)
 					? new this.Ease(options.ease[0],options.ease[1],{resolution:options.easeResolution,precision:options.easePrecision})
@@ -2185,14 +2185,14 @@
 				trackLength,
 				trackHeight;
 			that.state = "ANIM";
-			that.currentAnimationFrame.s = window.requestAnimationFrame(function(){
-				that.currentAnimationFrame.s = window.requestAnimationFrame(function(){
+			that.currentAnimationFrame.s = $window.requestAnimationFrame(function(){
+				that.currentAnimationFrame.s = $window.requestAnimationFrame(function(){
 					viewportWidth = that.viewportWidth;
 					viewportHeight = that.viewportHeight;
-					that.currentAnimationFrame.s = window.requestAnimationFrame(function(){
+					that.currentAnimationFrame.s = $window.requestAnimationFrame(function(){
 						trackLength = that.getMaxTrackLength;
 						trackHeight = that._trackHeight;
-						that.currentAnimationFrame.s = window.requestAnimationFrame(m.moveTo(n,nY,that,e,d,viewportWidth,viewportHeight,trackLength,trackHeight));
+						that.currentAnimationFrame.s = $window.requestAnimationFrame(m.moveTo(n,nY,that,e,d,viewportWidth,viewportHeight,trackLength,trackHeight));
 					});
 				});
 			});
@@ -2216,7 +2216,7 @@
 							that.currentAnimationFrame.s = undefined;
 							return
 						}
-						that.currentAnimationFrame.s = window.requestAnimationFrame(f);
+						that.currentAnimationFrame.s = $window.requestAnimationFrame(f);
 					};
 				return f;
 			}
@@ -2225,7 +2225,7 @@
 			var that = this,
 				f = function(e){
 					if(f._busy){return}
-					that.currentAnimationFrame.sMan = window.requestAnimationFrame(function(){
+					that.currentAnimationFrame.sMan = $window.requestAnimationFrame(function(){
 						that.painters.every(function(d,i){return !d.repaintScheduled;}) && that.repaint();
 						f._busy = false;
 						that.currentAnimationFrame.sMan = undefined;
@@ -2310,10 +2310,10 @@
 					action.call(obj,options);
 					return;
 				} else {
-					currentFrame.value = window.requestAnimationFrame(watch);
+					currentFrame.value = $window.requestAnimationFrame(watch);
 				}
 			};
-			currentFrame.value = window.requestAnimationFrame(watch);
+			currentFrame.value = $window.requestAnimationFrame(watch);
 			return currentFrame;
 		};
 		/*
