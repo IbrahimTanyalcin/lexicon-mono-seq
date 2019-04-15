@@ -1,0 +1,3 @@
+https://distreau.com/lexicon-mono-seq/datasets/chrX.0M.1M.txt //reference chromosome X from 0Mb to 1Mb
+https://distreau.com/lexicon-mono-seq/datasets/chrX.1M.2M.txt //chromosome X from 0Mb to 1Mb
+https://distreau.com/lexicon-mono-seq/datasets/pi10M.txt //first 10 million digits of PI

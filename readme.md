@@ -19,7 +19,7 @@ None.
 
 ## Tool's purpose
 
-In truth this small script is a ascii animation framework that comes with performance baked in. It has its own cached easing functions and recycles bath of DOM elements to keep painting and rendering as short as possible. Possible use cases for:
+In truth this small script is a ascii animation framework that comes with performance baked in. It has its own cached easing functions and recycles batch of DOM elements to keep painting and rendering as short as possible. Possible use cases for:
 
 - **Bioinformatics** : displaying long (even > 1Mb) sequences with frame-shifts. Aligning DNA/amino acids etc. 
 
