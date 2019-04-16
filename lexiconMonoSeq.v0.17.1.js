@@ -107,7 +107,7 @@
 		##############PROTO############
 		###############################
 		*/
-		_LexiconMonoSeq.prototype.version = "0.17.0";
+		_LexiconMonoSeq.prototype.version = "0.17.1";
 		_LexiconMonoSeq.prototype._scrollLeftOffset = 0;
 		_LexiconMonoSeq.prototype._50spaces = "                                                  ";
 		_LexiconMonoSeq.prototype.set = function(k,v){
