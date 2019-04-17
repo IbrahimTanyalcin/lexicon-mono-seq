@@ -34,5 +34,14 @@
     "eslint-plugin-standard": "^3.0.1",
     "uglify-js": "^3.0.28"
   },
-  "main": "lexiconMonoSeq.v0.17.2.js"
+  "main": "lexiconMonoSeq.v0.17.3.js",
+  "sniper": {
+    "js": [
+      "./lexiconMonoSeq.v0.17.3.js"
+    ],
+    "snippets": [
+      "snippets"
+    ],
+    "first": "snippet-1"
+  }
 }
