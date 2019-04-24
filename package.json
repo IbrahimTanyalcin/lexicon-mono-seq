@@ -36,7 +36,7 @@
   },
   "main": "lexiconMonoSeq.v0.17.3.js",
   "sniper": {
-    "js": [
+    "buildJS": [
       "./lexiconMonoSeq.v0.17.3.js"
     ],
     "snippets": [
