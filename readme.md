@@ -63,6 +63,12 @@ Above link can change if a new release is published. You can try adding the repo
 
 For example:
 
+> Npm
+
+`<script src="https://cdn.jsdelivr.net/npm/lexicon-mono-seq@1.2.5/lexiconMonoSeq.v0.17.3.js"></script>`
+
+> Github
+
 `<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq@0.16.0/lexiconMonoSeq.v0.16.0.js"></script>`
 
 Alternatively you can requests all versions from here:
@@ -97,7 +103,7 @@ Above will skip 30 frames (considering 60 frames = 1 second) and then update, gi
 
 ## Examples
 
-### 1
+### 1 1000 X 10000 Random Sequences
 
 ![example1](./images/example1.gif)
 
@@ -117,7 +123,7 @@ instance.update(obj,{durationPaint:500});
 ```
 The second argument above are additional options which you can pass to *LexiconMonoSeq*.
 
-### 2
+### 2 Dynamic Updates of Sequences
 
 ![example2](./images/example2.gif)
 
@@ -126,8 +132,7 @@ The second argument above are additional options which you can pass to *LexiconM
 
 You do not have to instantiate a new version each time your object changes, you can repeteadly call <code>update</code> method to redraw sequences. Things to be removed/added/changed are arranged automatically.
 
-### 3
-
+### 3 First 10 Million Digits of PI to Letters
 ![example3](./images/example3.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-3.html)
@@ -155,8 +160,7 @@ Info looks like:
 
 You can also use the <code>getInfoFromRect</code> method to receive sequences from minimal bounding region of a given *DOM Rect* or *Object* with `top`,`left`,`width` and `height` properties supplied by the user.
 
-### 4 
-
+### 4 Random Sequences + Random Smooth Scrolling
 ![example4](./images/example4.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-4.html)
@@ -169,8 +173,7 @@ instance.scrollToPos(Math.random()*10000,Math.random()*1000)
 ```
 Above would scroll to some random position along the map.
 
-### 5
-
+### 5 Animating Ascii Art
 ![example5](./images/example5.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-5.html)
@@ -193,8 +196,7 @@ instance.registerType(
     "rgba(0,0,0,0.9)" //textColor
 );
 ```
-### 6 
-
+### 6 Reading Clustal.wl Files
 ![example6](./images/example6.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-6.html)
@@ -205,8 +207,7 @@ You can also read clustal.wl files if you provide them to *LexiconMonoSeq* as a 
 ```JavaScript
 instance.update(LexiconMonoSeq.readClustal(String))
 ```
-### 7
-
+### 7 ~10 Million Bases (0-1Mb/1-2Mb) of Chromosome X with 3 Possible Amino Acid Frameshifts
 ![example7](./images/example7.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-7.html)
@@ -216,14 +217,12 @@ Passing the optional `posOffset` shifts a given sequence to the right 1 unit cha
 
 The above example displays the first million bases of chromosomeX with 3 possible frames of amino acids.
 
-### 8
-
+### 8 Ascii Art Transitions
 ![example8](./images/example8.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-8.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-8.html)
-
-ASCII glitch art
+> #### [Test @Observable](https://observablehq.com/@ibrahimtanyalcin/ascii-warp-github)
 
 ## Creating an instance
 

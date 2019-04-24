@@ -27,7 +27,7 @@ bibliography: paper.bib
 
 In Bioinformatics, one of the most common problems is depiction of long amino-acid / dna sequences and their comparison [@Li2018]. Routinely, these sequences are aligned and the data is stored in common formats such as [clustal](http://www.clustal.org/download/clustalw_help.txt) [@clustal]. These alignments are called Multiple Sequence Alignments ([MSA](https://en.wikipedia.org/wiki/Multiple_sequence_alignment)) and can be viewed with variety of different [tools](https://en.wikipedia.org/wiki/List_of_alignment_visualization_software).
 
-*Lexicon-Mono-Seq* is an MSA viewer specially designed for browsers that uses native [DOM Text](https://www.w3.org/TR/dom/#dom-node-textcontent) + [SVG](https://www.w3.org/TR/SVG11/) instead of [HTML5 canvas](https://www.w3.org/TR/2011/WD-html5-20110525/the-canvas-element.html).
+*Lexicon-Mono-Seq* is an MSA viewer specially designed for browsers that uses native [DOM Text](https://www.w3.org/TR/dom/#dom-node-textcontent) + [SVG](https://www.w3.org/TR/SVG11/) [@SnipViz,@EnsemblMView] instead of [HTML5 canvas](https://www.w3.org/TR/2011/WD-html5-20110525/the-canvas-element.html) [@MSAViewer,@IGV].
 
 Several MSA viewers that are already in use rely on rendering characters as an image using the *canvas* element. Although reliable and convenient, this can result in 2 problems: 
   - Higher memory usage,
