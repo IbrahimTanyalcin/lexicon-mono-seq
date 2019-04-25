@@ -12,6 +12,7 @@ layout: post
 ![npm](https://img.shields.io/npm/dm/lexicon-mono-seq.svg)
 ![GitHub file size in bytes](https://img.shields.io/github/size/IbrahimTanyalcin/lexicon-mono-seq/lexiconMonoSeq.v0.17.3.min.js.svg)
 ![jsDelivr hits (npm)](https://img.shields.io/jsdelivr/npm/hm/lexicon-mono-seq.svg?color=orange)
+![David](https://img.shields.io/david/IbrahimTanyalcin/lexicon-mono-seq.svg)
 
 *LexiconMonoSeq* is a multiple sequence alignment viewer ([MSA](https://en.wikipedia.org/wiki/Multiple_sequence_alignment)) that works with *monospace* fonts. You can use this tool for showing any arbitrary number of strings as well. The library renders DOM Text asynchronously.
 
