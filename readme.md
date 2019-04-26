@@ -110,7 +110,7 @@ Above will skip 30 frames (considering 60 frames = 1 second) and then update, gi
 
 ![example1](./images/example1.gif)
 
-> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-1.html)
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/1000x10000RandomSeq.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-1.html)
 
 *LexiconMonoSeq* comes with static (directly attached to the main function) methods that allows you to attach a *ruler* to your object, it finds the longest sequence and adds a ruler either to top of bottom of your dataset:
@@ -130,7 +130,7 @@ The second argument above are additional options which you can pass to *LexiconM
 
 ![example2](./images/example2.gif)
 
-> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-2.html)
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/dynamicUpdate.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-2.html)
 
 You do not have to instantiate a new version each time your object changes, you can repeteadly call <code>update</code> method to redraw sequences. Things to be removed/added/changed are arranged automatically.
@@ -138,7 +138,7 @@ You do not have to instantiate a new version each time your object changes, you 
 ### 3 First 10 Million Digits of PI to Letters
 ![example3](./images/example3.gif)
 
-> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-3.html)
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/PI10Million.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-3.html)
 
 If you ever need to get coordinates and data from *LexiconMonoSeq*, you can pass the evet to its <code>getInfoFromEvent</code> method:
@@ -166,7 +166,7 @@ You can also use the <code>getInfoFromRect</code> method to receive sequences fr
 ### 4 Random Sequences + Random Smooth Scrolling
 ![example4](./images/example4.gif)
 
-> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-4.html)
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/randomSequenceSmoothScroll.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-4.html)
 
 You can automatically scroll to any horizontal/vertical position, for a dataset of 10000 letters length max and 1000 sequences:
@@ -179,7 +179,7 @@ Above would scroll to some random position along the map.
 ### 5 Animating Ascii Art
 ![example5](./images/example5.gif)
 
-> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-5.html)
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/asciiAnimation.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-5.html)
 
 You can always register new types using <code>registerType</code>:
@@ -202,7 +202,7 @@ instance.registerType(
 ### 6 Reading Clustal.wl Files
 ![example6](./images/example6.gif)
 
-> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-6.html)
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/clustalW.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-6.html)
 
 You can also read clustal.wl files if you provide them to *LexiconMonoSeq* as a string:
@@ -213,7 +213,7 @@ instance.update(LexiconMonoSeq.readClustal(String))
 ### 7 ~10 Million Bases (0-1Mb/1-2Mb) of Chromosome X with 3 Possible Amino Acid Frameshifts
 ![example7](./images/example7.gif)
 
-> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-7.html)
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/chrX10Mb.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-7.html)
 
 Passing the optional `posOffset` shifts a given sequence to the right 1 unit char. This means if a sequence has `charWidth` of 10 and `posOffset` is 1, it is shifted 0.1 chars compared to its `charWidth`. This allows you to control track position of which you can't achive by adding spaces to the left. This property is useful if you are going to align DNA with amino acids or tracks with different `charWidth`.
@@ -223,7 +223,7 @@ The above example displays the first million bases of chromosomeX with 3 possibl
 ### 8 Ascii Art Transitions
 ![example8](./images/example8.gif)
 
-> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/example-8.html)
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/asciiAnimationGithub.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-8.html)
 > #### [Test @Observable](https://observablehq.com/@ibrahimtanyalcin/ascii-warp-github)
 
