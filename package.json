@@ -1,6 +1,6 @@
 {
   "name": "lexicon-mono-seq",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "LexiconMonoSeq, DOM Text based MSA visualization written in Javascript",
   "keywords": [
     "visualization",
