@@ -17,12 +17,12 @@
 <title>LexiconMonoSeq</title>
 <style>
 	@font-face {font-family: "Consolas";
-		src: url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.eot");
-		src: url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.eot?#iefix") format("embedded-opentype"),
-		url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.woff2") format("woff2"),
-		url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.woff") format("woff"),
-		url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.ttf") format("truetype"),
-		url("//db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.svg#Consolas") format("svg");
+		src: url("http://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.eot");
+		src: url("http://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.eot?#iefix") format("embedded-opentype"),
+		url("http://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.woff2") format("woff2"),
+		url("http://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.woff") format("woff"),
+		url("http://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.ttf") format("truetype"),
+		url("http://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.svg#Consolas") format("svg");
 	}
 	#test {
 		width:75vw;
@@ -46,34 +46,35 @@
 			var instance = window.instance = LexiconMonoSeq("#test",{parallelRendering:5}); //create instance
 			instance.displayPadding = 0.1; //default is 0.2
 			//Allow sequences to be created, then fire up 
-			instance.skipFrames(5).then(function(){this.update(
+			instance.isFontLoaded(200).then(function(){this.update(
 				LexiconMonoSeq.readClustal(
-					"CLUSTAL W (1.82) multiple sequence alignment\n"
-					+ "												\n"
-					+ "												\n"
+					"CLUSTAL W (1.82) multiple sequence alignment"
+					+ "                                                                              \n"
+					+ "                                                                              \n"
 					+ "FOSB_MOUSE      MFQAFPGDYDSGSRCSSSPSAESQYLSSVDSFGSPPTAAASQECAGLGEMPGSFVPTVTA 60\n"
 					+ "FOSB_HUMAN      MFQAFPGDYDSGSRCSSSPSAESQYLSSVDSFGSPPTAAASQECAGLGEMPGSFVPTVTA 60\n"
-					+ "			  ************************************************************\n"
-					+ "																			\n"
+					+ "                ************************************************************\n"
+					+ "                                                                            \n" 
 					+ "FOSB_MOUSE      ITTSQDLQWLVQPTLISSMAQSQGQPLASQPPAVDPYDMPGTSYSTPGLSAYSTGGASGS 120\n"
 					+ "FOSB_HUMAN      ITTSQDLQWLVQPTLISSMAQSQGQPLASQPPVVDPYDMPGTSYSTPGMSGYSSGGASGS 120\n"
-					+ "			  ********************************.***************:*.**:******\n"
-					+ "																			\n"
+					+ "                ********************************.***************:*.**:******\n"
+					+ "                                                                            \n"
 					+ "FOSB_MOUSE      GGPSTSTTTSGPVSARPARARPRRPREETLTPEEEEKRRVRRERNKLAAAKCRNRRRELT 180\n"
 					+ "FOSB_HUMAN      GGPSTSGTTSGPGPARPARARPRRPREETLTPEEEEKRRVRRERNKLAAAKCRNRRRELT 180\n"
-					+ "			  ****** ***** .**********************************************\n"
-					+ "																			\n"
+					+ "                ****** ***** .**********************************************\n"
+					+ "                                                                            \n"
 					+ "FOSB_MOUSE      DRLQAETDQLEEEKAELESEIAELQKEKERLEFVLVAHKPGCKIPYEEGPGPGPLAEVRD 240\n"
 					+ "FOSB_HUMAN      DRLQAETDQLEEEKAELESEIAELQKEKERLEFVLVAHKPGCKIPYEEGPGPGPLAEVRD 240\n"
-					+ "			  ************************************************************\n"
-					+ "																			\n"
+					+ "                ************************************************************\n"
+					+ "                                                                            \n"
 					+ "FOSB_MOUSE      LPGSTSAKEDGFGWLLPPPPPPPLPFQSSRDAPPNLTASLFTHSEVQVLGDPFPVVSPSY 300\n"
 					+ "FOSB_HUMAN      LPGSAPAKEDGFSWLLPPPPPPPLPFQTSQDAPPNLTASLFTHSEVQVLGDPFPVVNPSY 300\n"
-					+ "			  ****:.******.**************:*:**************************.***\n"
-					+ "																			\n"
+					+ "                ****:.******.**************:*:**************************.***\n"
+					+ "                                                                            \n"
 					+ "FOSB_MOUSE      TSSFVLTCPEVSAFAGAQRTSGSEQPSDPLNSPSLLAL 338\n"
 					+ "FOSB_HUMAN      TSSFVLTCPEVSAFAGAQRTSGSDQPSDPLNSPSLLAL 338\n"
-					+ "			  ***********************:**************\n"
+					+ "                ***********************:**************\n",
+					{conservation:true}
 				)
 			)});
 		}();

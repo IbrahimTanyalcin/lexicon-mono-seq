@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta name="keywords" content="Lexicon,LexiconMonoSeq,Data,Visualization,Javascript">
+<meta name="author" content="Ibrahim Tanyalcin">
+<meta property="og:title" content="LexiconMonoSeq">
+<meta property="og:description" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta property="og:image" content="//cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/logo.gif">
+<meta property="og:url" content="//github.com/IbrahimTanyalcin/lexicon-mono-seq">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:site_name" content="LexiconMonoSeq">
+<meta name="twitter:image:alt" content="LexiconMonoSeq, DOM Text based MSA visualization written in Javascript">
+<meta name="twitter:widgets:theme" content="light">
+<meta name="twitter:widgets:link-color" content="#55acee">
+<meta name="twitter:widgets:border-color" content="#55acee">
+<meta name="theme-color" content="#1e90ff">
+<title>LexiconMonoSeq</title>
+<style>
+	@font-face {font-family: "Consolas";
+		src: url("http://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.eot");
+		src: url("http://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.eot?#iefix") format("embedded-opentype"),
+		url("http://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.woff2") format("woff2"),
+		url("http://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.woff") format("woff"),
+		url("http://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.ttf") format("truetype"),
+		url("http://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.svg#Consolas") format("svg");
+	}
+	#test {
+		width:75vw;
+		height:35vh;
+		position:absolute;
+		margin:auto;
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+	}
+	#changeScheme {
+		width:200px;
+		height:100px;
+		display:block;
+		position:absolute;
+		margin:auto;
+		top:20px;
+		right:0;
+		left:0;
+	}
+	html {
+		transition:background 1s ease;
+	}
+	body {
+		margin:0px;
+	}
+</style>
+<body>
+	<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq@0.18.0/lexiconMonoSeq.v0.18.0.js"></script>
+	<button id="changeScheme">Change Scheme</button>
+	<div id="test"></div>
+	<script>
+		!function(){
+			var instance = window.instance = LexiconMonoSeq("#test",{parallelRendering:5}),//create instance
+				colorScheme = 1;
+			document.getElementById("changeScheme").onclick = function(){
+				colorScheme = 2 + ~colorScheme;
+				document.documentElement.style.background = colorScheme ? "White" : "Black";
+				updateColorScheme();
+			};
+			instance.displayPadding = 0.1; //default is 0.2
+			//Allow sequences to be created, then fire up 
+			function updateColorScheme(){
+				instance
+				.isFontLoaded(200)
+				.then(function(){
+					this.maxAllowedLabelLength = 35;
+				}).then(function(){
+					this.update(
+						LexiconMonoSeq.createRuler(
+							[
+								{
+									name: colorScheme ? "jalviewClustal" : this.darkenColorScheme("jalviewClustal"),
+									seq: sequences[0],
+									type: colorScheme ? "jalviewClustal" : this.darkenColorScheme("jalviewClustal")
+								},
+								{
+									name: colorScheme ? "jalviewZappo" : this.darkenColorScheme("jalviewZappo"),
+									seq: sequences[1],
+									type: colorScheme ? "jalviewZappo" : this.darkenColorScheme("jalviewZappo")
+								},
+								{
+									name: colorScheme ? "jalviewTaylor" : this.darkenColorScheme("jalviewTaylor"),
+									seq: sequences[2],
+									type: colorScheme ? "jalviewTaylor" : this.darkenColorScheme("jalviewTaylor")
+								},
+								{
+									name: colorScheme ? "jalviewHydrophobicity" : this.darkenColorScheme("jalviewHydrophobicity"),
+									seq: sequences[3],
+									type: colorScheme ? "jalviewHydrophobicity" : this.darkenColorScheme("jalviewHydrophobicity")
+								},
+								{
+									name: colorScheme ? "jalviewStrandPropensity" : this.darkenColorScheme("jalviewStrandPropensity"),
+									seq: sequences[4],
+									type: colorScheme ? "jalviewStrandPropensity" : this.darkenColorScheme("jalviewStrandPropensity")
+								},
+								{
+									name: colorScheme ? "jalviewTurnPropensity" : this.darkenColorScheme("jalviewTurnPropensity"),
+									seq: sequences[5],
+									type: colorScheme ? "jalviewTurnPropensity" : this.darkenColorScheme("jalviewTurnPropensity")
+								},
+								{
+									name: colorScheme ? "jalviewBuriedIndex" : this.darkenColorScheme("jalviewBuriedIndex"),
+									seq: sequences[6],
+									type: colorScheme ? "jalviewBuriedIndex" : this.darkenColorScheme("jalviewBuriedIndex")
+								},
+								{
+									name: colorScheme ? "jalviewNucleotide" : this.darkenColorScheme("jalviewNucleotide"),
+									seq: sequences[7],
+									type: colorScheme ? "jalviewNucleotide" : this.darkenColorScheme("jalviewNucleotide")
+								},
+								{
+									name: colorScheme ? "jalviewPurinePyrimidine" : this.darkenColorScheme("jalviewPurinePyrimidine"),
+									seq: sequences[8],
+									type: colorScheme ? "jalviewPurinePyrimidine" : this.darkenColorScheme("jalviewPurinePyrimidine")
+								}
+							]
+						,true)
+					)
+				});
+			};
+			//initiate
+			updateColorScheme();
+			/*HELPER FUNCTIONS*/
+			var lettersAA = Object.keys(instance.common.opacities),
+				lettersDNA = Object.keys(instance.colors.jalviewNucleotide),
+				sequences = Array.apply(null,Array(9)).map(function(d,i){return generateRandomSeq(i < 7 ? "aa" : "");});
+			function generateRandomSeq(type){
+				var seq = "";
+				for(var i = 0,j = type === "aa" ? lettersAA : lettersDNA,l = j.length;i<100000;++i){
+					seq += j[Math.random() * l | 0];
+				}
+				return seq;
+			}
+		}();
+	</script>
+</body>
+</html>

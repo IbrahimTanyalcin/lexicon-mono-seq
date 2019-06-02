@@ -233,6 +233,98 @@ The above example displays the first million bases of chromosomeX with 3 possibl
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/example-8.html)
 > #### [Test @Observable](https://observablehq.com/@ibrahimtanyalcin/ascii-warp-github)
 
+### 9 Reading Clustal With Conservation
+
+You can also opt to show the conservation in Clustal WL files:
+
+```JavaScript
+LexiconMonoSeq.readClustal(
+    "CLUSTAL W (1.82) multiple sequence alignment....",
+    {conservation:true}
+);
+```
+
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/clustalW_2.html)
+> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/clustalW_2.html)
+
+### 10 Choosing color schemes
+
+There are different color schemes you can choose from, the classic "aa" scheme is based on http://ugene.net/forum/YaBB.pl?num=1337064665, the jalview based schemes are taken from http://www.jalview.org/help/html/colourSchemes/index.html
+
+```JavaScript
+- aa //amino acid
+- jalviewClustal 
+- jalviewZappo
+- jalviewTaylor
+- jalviewHydrophobicity
+- jalviewHelixPropensity
+- jalviewStrandPropensity
+- jalviewTurnPropensity
+- jalviewBuriedIndex
+- jalviewNucleotide
+- jalviewPurinePyrimidine
+- dna //DNA
+- ruler //used in sequence numbering
+- alphabet //generic letters
+- number
+```
+
+You can always register new colors using `registerType` method:
+```JavaScript
+instance.registerType(
+    "myType", //type name
+    {"A":"#ffbbaa","B":"00aacc"...}, //colors for each letter box
+    "rgba(0,0,0,0.9)", //color for text
+    {"A":0.95, "B": 0.8...} //opacity for each letter box
+);
+```
+
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/colorSchemes.html)
+> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/colorSchemes.html)
+
+### 11 Fetching Data
+
+LexiconMonoSeq has a built-in fetch mechanism which returns an async operator much like `Promises` in ES6:
+
+```JavaScript
+instance
+.fetch("//someurl.com/lexicon-mono-seq/datasets/file.json","json")
+.then(function(json){
+    //do something with the json
+    //example: this.update(json)
+})
+```
+In certain situations you might have to call fetch in an already async operator, in that case to avoid too much callbacks, you can do:
+
+```JavaScript
+instance
+.async(function(){
+    var response = {value:null,done:false};
+    setTimeout(function(){
+        response.value = "//someurl.com/lexicon-mono-seq/datasets/file.json";
+        response.done = true;
+    },1000);
+    return response;
+}).then(function(retValue){
+    var response = {value:null,done:false};
+    this
+    .fetch(retValue,"json")
+    .then(function(json){
+        response.value = json;
+        response.done = true;
+    });
+    return response
+}).then(function(retValue){
+    //do something with the return value (retValue);
+    //inside thenable, this refers to the instance
+})
+```
+
+Since `fetch` returns an async thenable, you can always call `catch` method for catching errors.
+
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/asyncFetch.html)
+> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/asyncFetch.html)
+
 ## Creating an instance
 
 > LexiconMonoSeq ( *container_ID_String_Or_Node_Reference* [ , *options* ] )
@@ -254,6 +346,90 @@ Above implicity returns a new instance of LexiconMonoSeq. Options is an *Object*
     labels: Boolean //Whether labels should be visible, default is true
 }
 ```
+
+## Registering new colors
+
+You can always register new colors using `registerType` method:
+```JavaScript
+instance.registerType(
+    "myType", //type name
+    {"A":"#ffbbaa","B":"00aacc"...}, //colors for each letter box
+    "rgba(0,0,0,0.9)", //color for text
+    {"A":0.95, "B": 0.8...} //opacity for each letter box
+);
+```
+The default jalview schemes comes with `"#ffffff"` for some letters, if you want to quickly generate a new scheme without having to call `registerType`,
+you can do:
+
+```JavaScript
+instance.darkenColorScheme("jalviewClustal","#3e3e3e"); //returns "jalviewClustalDark"
+```
+
+For instance above, "jalviewClustal" is an in-built scheme, calling `darkenColorScheme` will create a new scheme "jalviewClustalDark" with `#ffffff` replaced with `"#3e3e3e"`. 
+- If the second argument is a function it will instead invoke that function for every letter, passing the letter and its color as arguments. 
+- The return value of above function will be new color for the darker scheme. 
+- The new scheme name will be the former scheme name + "Dark". This string is returned by `darkenColorScheme`. Calling this method multiple times has no affect, it will return the scheme name without overwriting, to overwrite, pass an additional parameter:
+
+```JavaScript
+instance.darkenColorScheme(
+    "jalviewClustal", //old scheme name
+    function(k,v){ //replacer function
+        if(k === "A" || k === "V"){
+            return "#aaaaaa";
+        } else {
+            return v;
+        }
+    },
+    true //overwrite even if dark scheme existed before
+); //returns "jalviewClustalDark"
+```
+An example is [here](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/colorSchemes.html);
+
+## Async Operations
+
+As of version 0.18.0 you can do async operations. There are 3 methods inherited by each instance which returns a *thenable* async object:
+
+- `instance.fetch`
+- `instance.skipFrames`
+- `instance.async`
+
+Each of them returns a thenable that can be chained:
+
+```JavaScript
+instance.async(function...).then(function...).skipFrames(50).then(function...).catch(function...)
+```
+
+Async operations do not require a polyfill and are written in ES5, they resemble much like promises. Each function inside a thenable is passed the reeturn value of the other function. However there are some catches:
+
+- If the return value inside a function is a primitive it is wrapped with an object of form `{value:your primitive,done:false}`. The next function in the chain grabs the value by accessing value, you do NOT have to extract it:
+
+```JavaScript
+instance
+.async(function(){
+    return 5;
+}).then(function(x){
+    console.log(x); //logs 5, not {value:5,done:true}
+});
+```
+
+- If the return value is of the form `{value:..,done:..}`, then the next function will not execute until `done:true` is observed. If frames are skipped in between, they will not start decrementing until `done:true` is observed as well:
+
+```JavaScript
+instance
+.async(function(){
+    var response = {value:null,done:false};
+    setTimeout(function(){
+        response.value = 10;
+        response.done = true;
+    },1000);
+    return response;
+})
+.skipFrames(120)
+.then(function(retValue){
+    console.log(retValue); //waits 1000ms, then waits 120 frames (~2000ms) and finally logs 10. 
+});
+```
+
 
 ## Updating data
 
@@ -284,6 +460,10 @@ Crates a new object of type *ruler* and returns it if *inject* is false. Otherwi
 
 Reads a clustal file and returns a dataset to be used later with `update` method. Options is an *Object* that can have 2 properties, `charWidth` and `type`. Default `charWidth` is 1 and `type` is "aa".  
 
+> LexiconMonoSeq.parseURL ( *url* )
+
+Parses the given url and returns an object with various properties such as protocol, hash, path etc. Taken and adapted from https://j11y.io/javascript/parsing-urls-with-the-dom/ , many thanks to @padolsey (James Padolsey). Internally used by `fetch` method. 
+
 ## Methods
 
 Below are a non-exhaustive list of methods that might be of use to the user.
@@ -300,7 +480,7 @@ Below are a non-exhaustive list of methods that might be of use to the user.
 - `instance.scrollToPos` ( *horizontalPos* [ , *verticalPos* [, *options* ] ] ) *// options can have keys ease and duration. Default ease is [{x:0.75,y:0},{x:0.25,y:1}]*
 - `instance.enableDrag` ( [ , options ] ) *// allows drag behavior, an options object can be passed with start, drag and end properties where each is a function to execute on dragStart, drag and dragEnd event. The functions have "this" point to the instance and have the current DOM event as the first argument. The second argument is the options Object itself*
 - `instance.disableDrag` ( ) *// disables drag behavior*
-- `instance.skipFrames` ( *frameCount* ) *//Waits for specified amount of frames before executing the following thenable. It returns an object with 2 properties `then` and `skipFrames`. Function inside the thenable is executed with `this` pointing to the `instance` itself. This is usually used to delay update right after an instance is created, allowing CSS styles to kick in:
+- `instance.skipFrames` ( frameCount [, passthrough ) *//Returns an async operator. Waits for specified amount of frames before executing the following thenable. It returns an object with 3 properties `then`, `skipFrames` and `catch`. Function inside the thenable is executed with `this` pointing to the `instance` itself. There is an optional pass-through parameter to pass to the next *thenable*. `skipFrames` is usually used to delay update right after an instance is created, allowing CSS styles to kick in (Although I recommend using the `isFontLoaded` method!):*
 ```JavaScript
     LexiconMonoSeq("#test",{parallelRendering:5})
     .skipFrames(30)
@@ -314,6 +494,23 @@ Below are a non-exhaustive list of methods that might be of use to the user.
     })
  ```
  Above would first create an `instace`, wait half a second, then update with new data, then after 1 frame (~17ms) `console.log` the `instance` itself, wait another 5 frames and finaly log "done!".
+
+ - `instance.fetch` ( url [, responseType ) *//Fetches the url and returns a thenable async operator. Default response type is "text", an optional parameter can be supplied for other responseTypes. The return value can be chained with `then`, `skipFrames` or `catch` methods*
+ - `instance.async` ( passthrough ) *//Returns an async operator. An optional parameter can be supplied to be passed to the next `thenable`. If the passthrough is a function, its return value is used instead. If inside a `then` clause you return an error object or throw, the `catch` clause if any will be executed:*
+
+```JavaScript
+instance.then(function(){
+    throw new Error("...");
+    //or
+    return new Error("...");
+}).catch(function(e){
+    console.log(e.message);
+})
+```
+
+ - `instance.isFontLoaded` ( [, check interval, timeout  ] ) *//Returns an async operator that resolved if the font is loaded. It works by comparing browser's default fall back font compared to specified font. Default check interval is 170ms, you can specify an optional timeout to force return an error object and invoke catch instead.*
+
+
 
 ## Properties
 
@@ -353,6 +550,7 @@ The inner constructor is not exposed, if you want to attach new methods directly
 ## TODO(s)
 
 - Currently the `fontWidth` getter/setter returns live values from the `Range` object, which changes with `CSS transform`. This causes applet svgs to missalign when parent is transformed ( for instance, if parent is scaled by 0.5, svgs get scaled by 0.25 because `fontWidth` returns half the values ). One solution could be to add a new getter/setter that multiplies transformation matrix with its inverse.
+- For very very tiny font sizes, we need to adjust font size dynamically for chrome or other browsers who similarly uses pixel rounding. For instance if a font size is specified as 8 and the bounding rect width for that is 4.46 pixels, we need to iteratively search for font sizes around 8 that yields a single decimal instead.
 
 ## Questions
 

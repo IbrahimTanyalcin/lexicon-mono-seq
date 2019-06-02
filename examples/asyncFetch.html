@@ -117,16 +117,23 @@
 				loading.style.visibility = "visible";
 				button.className = "inactive";
 				state = "inactive";
-				var req = new XMLHttpRequest();
-				req.responseType = "json";
-				req.open("GET","//distreau.com/lexicon-mono-seq/datasets/" + fileName,true);
-				req.onload = function(e){
+				instance
+				.isFontLoaded(200)
+				.then(function(){
+					var result = {value:null,done:false};
+					this
+					.fetch("//distreau.com/lexicon-mono-seq/datasets/" + fileName,"json")
+					.then(function(response){
+						result.value = response;
+						result.done = true;
+					});
+					return result;
+				}).then(function(response){
 					button.className = "";
 					state = "active";
 					loading.style.visibility = "hidden";
-					instance.update(LexiconMonoSeq.createRuler(this.response,true));
-				};
-				req.send();
+					this.update(LexiconMonoSeq.createRuler(response,true));
+				});
 			};
 			button.onclick = function(){
 				if(state === "inactive"){return}

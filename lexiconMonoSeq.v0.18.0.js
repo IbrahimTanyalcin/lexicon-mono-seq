@@ -107,7 +107,7 @@
 		##############PROTO############
 		###############################
 		*/
-		_LexiconMonoSeq.prototype.version = "0.17.3";
+		_LexiconMonoSeq.prototype.version = "0.18.0";
 		_LexiconMonoSeq.prototype._scrollLeftOffset = 0;
 		_LexiconMonoSeq.prototype._50spaces = "                                                  ";
 		_LexiconMonoSeq.prototype.set = function(k,v){
@@ -119,10 +119,54 @@
 		_LexiconMonoSeq.prototype.generateRandomString = function(){
 			return (Math.random()*1e9 | 0).toString(16);
 		};
+		_LexiconMonoSeq.prototype.common = {
+			opacities: {
+				A: 0.95,
+				B: 0.95,
+				C: 0.95,
+				U: 0.95,
+				D: 0.95,
+				E: 0.95,
+				F: 0.95,
+				G: 0.95,
+				H: 0.95,
+				I: 0.95,
+				K: 0.95,
+				L: 0.95,
+				M: 0.95,
+				N: 0.95,
+				P: 0.95,
+				Q: 0.95,
+				R: 0.95,
+				S: 0.95,
+				T: 0.95,
+				V: 0.95,
+				W: 0.95,
+				X: 0.95,
+				Y: 0.95,
+				Z: 0.95,
+				"?": 0.8,
+				"-": 0.8,
+				":": 0.4,
+				"*": 0.2,
+				".": 0.1,
+				"·": 0.05,
+				" ": 0
+			},
+			opacitiesPunctuation: {
+				"-": 0.8,
+				":": 0.4,
+				"*": 0.2,
+				".": 0.1,
+				"·": 0.05,
+				" ": 0
+			}
+		};
 		_LexiconMonoSeq.prototype.colors = {
 			aa: {
 				"A": "#ffffc9",
 				"C": "#e3f9ad",
+				"U": "#e3f9ad",
 				"E": "#f93333",
 				"D": "#fb7979",
 				"G": "#c0c0c0",
@@ -141,6 +185,326 @@
 				"W": "#85b0cd",
 				"V": "#ffffab",
 				"Y": "#7dafb9",
+				"X": "#333333",
+				"?": "#333333",
+				"-": "#778899",
+				":": "#778899",
+				"*": "#778899",
+				".": "#778899",
+				"·": "#778899",
+				" ": "#778899"
+			},
+			jalviewClustal: {
+				A: "#80a0f0",
+				B: "#ffffff",
+				C: "#f08080",
+				U: "#f08080",
+				D: "#c048c0",
+				E: "#c048c0",
+				F: "#80a0f0",
+				G: "#f09048",
+				H: "#15a4a4",
+				I: "#80a0f0",
+				K: "#f01505",
+				L: "#80a0f0",
+				M: "#80a0f0",
+				N: "#00ff00",
+				P: "#ffff00",
+				Q: "#00ff00",
+				R: "#f01505",
+				S: "#00ff00",
+				T: "#00ff00",
+				V: "#80a0f0",
+				W: "#80a0f0",
+				X: "#ffffff",
+				Y: "#15a4a4",
+				Z: "#ffffff",
+				"?": "#333333",
+				"-": "#778899",
+				":": "#778899",
+				"*": "#778899",
+				".": "#778899",
+				"·": "#778899",
+				" ": "#778899"
+			},
+			jalviewZappo: {
+				A: "#ffafaf",
+				B: "#ffffff",
+				C: "#ffff00",
+				U: "#ffff00",
+				D: "#ff0000",
+				E: "#ff0000",
+				F: "#ffc800",
+				G: "#ff00ff",
+				H: "#6464ff",
+				I: "#ffafaf",
+				K: "#6464ff",
+				L: "#ffafaf",
+				M: "#ffafaf",
+				N: "#00ff00",
+				P: "#ff00ff",
+				Q: "#00ff00",
+				R: "#6464ff",
+				S: "#00ff00",
+				T: "#00ff00",
+				V: "#ffafaf",
+				W: "#ffc800",
+				X: "#ffffff",
+				Y: "#ffc800",
+				Z: "#ffffff",
+				"?": "#333333",
+				"-": "#778899",
+				":": "#778899",
+				"*": "#778899",
+				".": "#778899",
+				"·": "#778899",
+				" ": "#778899"
+			},
+			jalviewTaylor: {
+				A: "#ccff00",
+				B: "#ffffff",
+				C: "#ffff00",
+				U: "#ffff00",
+				D: "#ff0000",
+				E: "#ff0066",
+				F: "#00ff66",
+				G: "#ff9900",
+				H: "#0066ff",
+				I: "#66ff00",
+				K: "#6600ff",
+				L: "#33ff00",
+				M: "#00ff00",
+				N: "#cc00ff",
+				P: "#ffcc00",
+				Q: "#ff00cc",
+				R: "#0000ff",
+				S: "#ff3300",
+				T: "#ff6600",
+				V: "#99ff00",
+				W: "#00ccff",
+				X: "#ffffff",
+				Y: "#00ffcc",
+				Z: "#ffffff",
+				"?": "#333333",
+				"-": "#778899",
+				":": "#778899",
+				"*": "#778899",
+				".": "#778899",
+				"·": "#778899",
+				" ": "#778899"
+			},
+			jalviewHydrophobicity: {
+				A: "#ad0052",
+				B: "#0c00f3",
+				C: "#c2003d",
+				U: "#c2003d",
+				D: "#0c00f3",
+				E: "#0c00f3",
+				F: "#cb0034",
+				G: "#6a0095",
+				H: "#1500ea",
+				I: "#ff0000",
+				K: "#0000ff",
+				L: "#ea0015",
+				M: "#b0004f",
+				N: "#0c00f3",
+				P: "#4600b9",
+				Q: "#0c00f3",
+				R: "#0000ff",
+				S: "#5e00a1",
+				T: "#61009e",
+				V: "#f60009",
+				W: "#5b00a4",
+				X: "#680097",
+				Y: "#4f00b0",
+				Z: "#0c00f3",
+				"?": "#333333",
+				"-": "#778899",
+				":": "#778899",
+				"*": "#778899",
+				".": "#778899",
+				"·": "#778899",
+				" ": "#778899"
+			},
+			jalviewHelixPropensity: {
+				A: "#e718e7",
+				B: "#49b649",
+				C: "#23dc23",
+				U: "#23dc23",
+				D: "#778877",
+				E: "#ff00ff",
+				F: "#986798",
+				G: "#00ff00",
+				H: "#758a75",
+				I: "#8a758a",
+				K: "#a05fa0",
+				L: "#ae51ae",
+				M: "#ef10ef",
+				N: "#1be41b",
+				P: "#00ff00",
+				Q: "#926d92",
+				R: "#6f906f",
+				S: "#36c936",
+				T: "#47b847",
+				V: "#857a85",
+				W: "#8a758a",
+				X: "#758a75",
+				Y: "#21de21",
+				Z: "#c936c9",
+				"?": "#333333",
+				"-": "#778899",
+				":": "#778899",
+				"*": "#778899",
+				".": "#778899",
+				"·": "#778899",
+				" ": "#778899"
+			},
+			jalviewStrandPropensity: {
+				A: "#5858a7",
+				B: "#4343bc",
+				C: "#9d9d62",
+				U: "#9d9d62",
+				D: "#2121de",
+				E: "#0000ff",
+				F: "#c2c23d",
+				G: "#4949b6",
+				H: "#60609f",
+				I: "#ecec13",
+				K: "#4747b8",
+				L: "#b2b24d",
+				M: "#82827d",
+				N: "#64649b",
+				P: "#2323dc",
+				Q: "#8c8c73",
+				R: "#6b6b94",
+				S: "#4949b6",
+				T: "#9d9d62",
+				V: "#ffff00",
+				W: "#c0c03f",
+				X: "#797986",
+				Y: "#d3d32c",
+				Z: "#4747b8",
+				"?": "#333333",
+				"-": "#778899",
+				":": "#778899",
+				"*": "#778899",
+				".": "#778899",
+				"·": "#778899",
+				" ": "#778899"
+			},
+			jalviewTurnPropensity: {
+				A: "#2cd3d3",
+				B: "#f30c0c",
+				C: "#a85757",
+				U: "#a85757",
+				D: "#e81717",
+				E: "#778888",
+				F: "#1ee1e1",
+				G: "#ff0000",
+				H: "#708f8f",
+				I: "#00ffff",
+				K: "#7e8181",
+				L: "#1ce3e3",
+				M: "#1ee1e1",
+				N: "#ff0000",
+				P: "#f60909",
+				Q: "#3fc0c0",
+				R: "#708f8f",
+				S: "#e11e1e",
+				T: "#738c8c",
+				V: "#07f8f8",
+				W: "#738c8c",
+				X: "#7c8383",
+				Y: "#9d6262",
+				Z: "#5ba4a4",
+				"?": "#333333",
+				"-": "#778899",
+				":": "#778899",
+				"*": "#778899",
+				".": "#778899",
+				"·": "#778899",
+				" ": "#778899"
+			},
+			jalviewBuriedIndex: {
+				A: "#00a35c",
+				B: "#00eb14",
+				C: "#0000ff",
+				U: "#0000ff",
+				D: "#00eb14",
+				E: "#00f10e",
+				F: "#008778",
+				G: "#009d62",
+				H: "#00d52a",
+				I: "#0054ab",
+				K: "#00ff00",
+				L: "#007b84",
+				M: "#009768",
+				N: "#00eb14",
+				P: "#00e01f",
+				Q: "#00f10e",
+				R: "#00fc03",
+				S: "#00d52a",
+				T: "#00db24",
+				V: "#005fa0",
+				W: "#00a857",
+				X: "#00b649",
+				Y: "#00e619",
+				Z: "#00f10e",
+				"?": "#333333",
+				"-": "#778899",
+				":": "#778899",
+				"*": "#778899",
+				".": "#778899",
+				"·": "#778899",
+				" ": "#778899"
+			},
+			jalviewNucleotide: {
+				A: "#64F73F",
+				B: "#ffffff",
+				C: "#FFB340",
+				D: "#ffffff",
+				G: "#EB413C",
+				H: "#ffffff",
+				I: "#ffffff",
+				K: "#ffffff",
+				M: "#ffffff",
+				N: "#ffffff",
+				R: "#ffffff",
+				S: "#ffffff",
+				T: "#3C88EE",
+				U: "#3C88EE",
+				V: "#ffffff",
+				W: "#ffffff",
+				X: "#ffffff",
+				Y: "#ffffff",
+				"?": "#333333",
+				"-": "#778899",
+				":": "#778899",
+				"*": "#778899",
+				".": "#778899",
+				"·": "#778899",
+				" ": "#778899"
+			},
+			jalviewPurinePyrimidine: {
+				A: "#FF83FA",
+				B: "#ffffff",
+				C: "#40E0D0",
+				D: "#ffffff",
+				G: "#FF83FA",
+				H: "#ffffff",
+				I: "#ffffff",
+				K: "#ffffff",
+				M: "#ffffff",
+				N: "#ffffff",
+				R: "#FF83FA",
+				S: "#ffffff",
+				T: "#40E0D0",
+				U: "#40E0D0",
+				V: "#ffffff",
+				W: "#ffffff",
+				X: "#ffffff",
+				Y: "#40E0D0",
+				"?": "#333333",
 				"-": "#778899",
 				":": "#778899",
 				"*": "#778899",
@@ -228,64 +592,36 @@
 			}
 		};
 		_LexiconMonoSeq.prototype.opacities = {
-			aa: {
-				"A": 0.95,
-				"C": 0.95,
-				"E": 0.95,
-				"D": 0.95,
-				"G": 0.95,
-				"F": 0.95,
-				"I": 0.95,
-				"H": 0.95,
-				"K": 0.95,
-				"M": 0.95,
-				"L": 0.95,
-				"N": 0.95,
-				"Q": 0.95,
-				"P": 0.95,
-				"S": 0.95,
-				"R": 0.95,
-				"T": 0.95,
-				"W": 0.95,
-				"V": 0.95,
-				"Y": 0.95,
-				"-": 0.8,
-				":": 0.4,
-				"*": 0.2,
-				".": 0.1,
-				"·": 0.05,
-				" ": 0
-			},
-			dna: {
-				"-": 0.8,
-				":": 0.4,
-				"*": 0.2,
-				".": 0.1,
-				"·": 0.05,
-				" ": 0
-			},
-			alphabet: {
-				"-": 0.8,
-				":": 0.4,
-				"*": 0.2,
-				".": 0.1,
-				"·": 0.05,
-				" ": 0
-			},
-			number: {
-				"-": 0.8,
-				":": 0.4,
-				"*": 0.2,
-				".": 0.1,
-				"·": 0.05,
-				" ": 0
-			},
+			aa: _LexiconMonoSeq.prototype.common.opacities,
+			jalviewClustal: _LexiconMonoSeq.prototype.common.opacities,
+			jalviewZappo: _LexiconMonoSeq.prototype.common.opacities,
+			jalviewTaylor: _LexiconMonoSeq.prototype.common.opacities,
+			jalviewHydrophobicity: _LexiconMonoSeq.prototype.common.opacities,
+			jalviewHelixPropensity: _LexiconMonoSeq.prototype.common.opacities,
+			jalviewStrandPropensity: _LexiconMonoSeq.prototype.common.opacities,
+			jalviewTurnPropensity: _LexiconMonoSeq.prototype.common.opacities,
+			jalviewBuriedIndex: _LexiconMonoSeq.prototype.common.opacities,
+			jalviewNucleotide: _LexiconMonoSeq.prototype.common.opacities,
+			jalviewPurinePyrimidine: _LexiconMonoSeq.prototype.common.opacities,
+			dna: _LexiconMonoSeq.prototype.common.opacitiesPunctuation,
+			alphabet: _LexiconMonoSeq.prototype.common.opacitiesPunctuation,
+			number: _LexiconMonoSeq.prototype.common.opacitiesPunctuation,
 			ruler: {
 				"·": 0.05
 			}
 		};
 		_LexiconMonoSeq.prototype.textColors = {
 			aa: "rgba(0,0,0,0.9)",
+			jalviewClustal: "rgba(0,0,0,0.9)",
+			jalviewZappo: "rgba(0,0,0,0.9)",
+			jalviewTaylor: "rgba(0,0,0,0.9)",
+			jalviewHydrophobicity: "rgba(255,255,255,0.8)",
+			jalviewHelixPropensity: "rgba(255,255,255,0.8)",
+			jalviewStrandPropensity: "rgba(255,255,255,0.8)",
+			jalviewTurnPropensity: "rgba(255,255,255,0.8)",
+			jalviewBuriedIndex: "rgba(255,255,255,0.8)",
+			jalviewNucleotide: "rgba(0,0,0,0.9)",
+			jalviewPurinePyrimidine: "rgba(0,0,0,0.9)",
 			dna: "rgba(255,255,255,0.8)",
 			alphabet: "rgba(0,0,0,0.9)",
 			number: "rgba(255,255,255,0.8)",
@@ -304,6 +640,23 @@
 				|| (prt.opacities[name] = {})
 			);
 			return this;				
+		};
+		_LexiconMonoSeq.prototype.darkenColorScheme = function(type,replacer,overwrite){
+			replacer = replacer || "#7e7e7e";
+			var nType = type + "Dark";
+			if (this.colors[nType] && !overwrite) {
+				return nType;
+			}
+			var o = this.caveManCopy(this.colors[type]);
+			Object.keys(o).forEach(function(d){
+				if (typeof replacer === "function") {
+					o[d] = replacer(d,o[d]);
+				} else if(o[d].toLowerCase() === "#ffffff") {
+					o[d] = replacer.toLowerCase();
+				}
+			});
+			this.registerType(nType,o,this.textColors[type],this.opacities[type]);
+			return nType;
 		};
 		_LexiconMonoSeq.prototype.reDraw = function(){
 			try {
@@ -1012,26 +1365,107 @@
 			wrapper.scrollTop = sY - (yF - yI);
 			options && options.drag && options.drag.call(instance,e,options);
 		};
-		_LexiconMonoSeq.prototype.skipFrames = function(nFrames){
-			var that = this;
+		_LexiconMonoSeq.prototype.skipFrames = function(nFrames,argObj,parent,catcher){
+			nFrames = nFrames instanceof this.skipFrames.Timer ? nFrames : new this.skipFrames.Timer(nFrames);
+			var that = this,
+				argObj = typeof argObj !== "object" 
+					? {value:argObj,done:true} 
+					: that.skipFrames.isExtractable(argObj)
+						? argObj
+						: {value:argObj,done:true};
 			return {
+				_parent: parent,
+				_invoked: false,
+				_child: null,
+				_isErrored: false,
+				_catch: catcher || null,
 				then: function(f){
+					this._invoked = true;
+					var thenable = this,
+						retVal = {value:undefined,done:false},
+						placeholder = null,
+						isExtractable = false;
 					that.watchman(
 						that,
-						function(counter){
-							return !--counter.counter
+						function(nFrames){
+							return argObj.done && nFrames.decrement() <= 0;
 						},
 						function(){
-							f.call(that);
+							if(argObj.value instanceof Error){
+								retVal.value = argObj.value;
+								thenable._isErrored = true;
+							} else {
+								try {
+									placeholder = f.call(that,argObj.value);
+									if(!(isExtractable = that.skipFrames.isExtractable(placeholder))) {
+										if ((retVal.value = placeholder) instanceof Error ){
+											throw retVal.value;
+										};
+									}
+								} catch (e) {
+									retVal.value = e;
+									thenable._isErrored = true;
+								}
+							}
+							if(isExtractable) {
+								that.watchman(
+									null,
+									function(){return placeholder.done;},
+									function(){that.skipFrames.Extractor(that,thenable,retVal,placeholder).PerformCatch(that,thenable,retVal);},
+									null
+								);
+							} else {
+								retVal.done = true;
+								that.skipFrames.PerformCatch(that,thenable,retVal);
+							}
 						},
-						{counter: nFrames}
+						nFrames
 					);
-					return that.skipFrames(1 + nFrames);
+					return this._child = that.skipFrames(new that.skipFrames.Timer(1,nFrames),retVal,this,this._catch);
 				},
 				skipFrames: function(_nFrames){
-					return that.skipFrames(nFrames + _nFrames);
+					this._invoked = true;
+					return this._child = that.skipFrames(new that.skipFrames.Timer(_nFrames,nFrames),argObj,this,this._catch);
+				},
+				catch: function(f){
+					if (typeof f === "function") {
+						this._catch = f;
+						this._parent && (this._parent._catch = f);
+					}
+					return this;
 				}
 			};
+		};
+		_LexiconMonoSeq.prototype.skipFrames.Catcher = function(e){throw e;};
+		_LexiconMonoSeq.prototype.skipFrames.PerformCatch = function(instance,thenable,retVal){
+			if (!thenable._child._invoked && thenable._isErrored){
+				thenable._catch 
+					? thenable._catch.call(instance,retVal.value)
+					: _LexiconMonoSeq.prototype.skipFrames.Catcher.call(instance,retVal.value);
+			}
+		};
+		_LexiconMonoSeq.prototype.skipFrames.Extractor = function(instance,thenable,retVal,placeholder){
+			retVal.value = placeholder.value; 
+			retVal.done = placeholder.done;
+			if (retVal.value instanceof Error) {
+				thenable._isErrored = true;
+			}
+			return instance.skipFrames;
+		};
+		_LexiconMonoSeq.prototype.skipFrames.isExtractable = function(o){return typeof o === "object" && o.hasOwnProperty("done") && o.hasOwnProperty("value");};
+		_LexiconMonoSeq.prototype.skipFrames.Timer = function (counter,parent){
+			this.counter = counter || 1;
+			this.parent = parent || 0;
+		};
+		_LexiconMonoSeq.prototype.skipFrames.Timer.prototype.valueOf = function(){
+			return this.counter + this.parent;
+		};
+		_LexiconMonoSeq.prototype.skipFrames.Timer.prototype.decrement = function(){
+			--this.counter;
+			return this;
+		};
+		_LexiconMonoSeq.prototype.async = function(o){
+			return this.skipFrames(1,typeof o === "function" ? o() : o);
 		};
 		_LexiconMonoSeq.prototype.quirks = {
 			busy:false,
@@ -1122,14 +1556,46 @@
 			return ruler;
 		};
 		LexiconMonoSeq.readClustal = function (str,options){
-			var o = str.split("\n")
+			var rndStr = _LexiconMonoSeq.prototype.generateRandomString(),
+				rndStrL = rndStr.length,
+				firstLine,
+				offsetLeft,
+				lineLength,
+				offsetRight,
+				trimLeft = /(?:\s|\t)(?:[0-9]+(?:\s+)?)?$/,
+				o = str.split("\n")
 				.slice(1)
-				.join("\n")
-				.match(/([A-Z_\-0-9]+)\s+([A-Z\-]+)(?:\s+[0-9]+)?/gi)
+				.map(function(d,i,a){
+					switch((this.sequence.test(d) << 1) + ((options && options.conservation && this.previous) << 0)){
+                        case 3:
+							return d;
+                        case 2:
+							this.previous = true;
+							return d;
+                        case 1:
+							this.previous = false;
+							return rndStr + d;
+                        case 0:
+							return false;
+                    }
+				},{sequence:/([A-Z_\-0-9]+)\s+([A-Z\-]+)(?:\s+[0-9]+)?/i,previous:false})
+				.filter(Boolean)
 				.reduce(function(ac,d,i,a){
 					var arr = d.split(/\s+/),
-						name = arr[0],
+						name = !d.indexOf(rndStr) ? "Cons." : arr[0],
+						seq;
+					if(!firstLine){
 						seq = arr[1];
+						firstLine = true;
+						offsetLeft = d.indexOf(seq);
+						lineLength = seq.length;
+						offsetRight = offsetLeft + lineLength;
+                    } else if (name !== "Cons.") {
+						seq = d.slice(offsetLeft,offsetRight);
+                    } else {
+						seq = d.slice(offsetLeft + rndStrL, offsetRight + rndStrL);
+                    }
+					seq = seq.replace(trimLeft,"");
 					if(ac[name]){
 						ac[name] += seq;
 					} else {
@@ -1146,6 +1612,37 @@
 					type: (options && options.type) || "aa"
 				};
 			})
+		};
+		//Below is directly from https://j11y.io/javascript/parsing-urls-with-the-dom/
+		//Kudos to JAMES PADOLSEY, great solution
+		LexiconMonoSeq.parseURL = function (url) {
+			var a =  document.createElement('a');
+			a.href = url;
+			var result = {
+				source: url,
+				protocol: a.protocol.replace(':',''),
+				host: a.hostname,
+				port: a.port,
+				query: a.search,
+				params: (function(){
+					var ret = {},
+						seg = a.search.replace(/^\?/,'').split('&'),
+						len = seg.length, i = 0, s;
+					for (;i<len;i++) {
+						if (!seg[i]) { continue; }
+						s = seg[i].split('=');
+						ret[s[0]] = s[1];
+					}
+					return ret;
+				})(),
+				file: (a.pathname.match(/\/?([^/?#]+)$/i) || [,''])[1],
+				hash: a.hash.replace('#',''),
+				path: a.pathname.replace(/^([^/])/,'/$1'),
+				relative: (a.href.match(/tps?:\/\/[^/]+(.+)/) || [,''])[1],
+				segments: a.pathname.replace(/^\//,'').split('\/'), 
+			};
+			result.isLocal = !/^https?|^\/\//i.test(result.source);
+			return result;
 		};
 		/*
 		###############################
@@ -2320,6 +2817,111 @@
 		/*
 		###############################
 		###########WATCHMAN############
+		###############################
+		*/
+		/*
+		###############################
+		#############FETCH#############
+		###############################
+		*/
+		_LexiconMonoSeq.prototype.fetch = function (url,responseType) {
+			responseType = responseType || "text";
+			var parsed = LexiconMonoSeq.parseURL(url),
+				isLocal = parsed.isLocal,
+				ajax = new XMLHttpRequest(),
+				k = responseType === "text" ? "responseText" : "response",
+				result = {
+					done:false,
+					value:null
+				},
+				onerror = function(e){
+					result.done = true;
+					result.value = new Error("Request to " + parsed.file + " has failed.");
+				},
+				onload = function(){
+					result.done = true;
+					result.value = ajax[k];
+				};
+			if (isLocal) {
+				result.done = true;
+				result.value = new Error("Your URL refers to a local path. Fetch will not work.");
+			} else {
+				ajax.responseType = responseType;
+				ajax.onload = onload;
+				ajax.onerror = onerror;
+				ajax.open("GET",parsed.source,true);
+				ajax.send();
+			}
+			return this.async(result);
+		};
+		/*
+		###############################
+		#############FETCH#############
+		###############################
+		*/
+		/*
+		###############################
+		###########FONTCHECK###########
+		###############################
+		*/
+		_LexiconMonoSeq.prototype.isFontLoaded = function(freq,timeout){
+			timeout = (+timeout || 60000) / 17 | 0;
+			freq = (+freq || 170) / 17 | 0;
+			var hidden = this.hidden,
+				hiddenParent = hidden.parentNode,
+				control = hiddenParent.appendChild(hidden.cloneNode(true)),
+				test = hiddenParent.appendChild(hidden.cloneNode(true)),
+				rangeControl = document.createRange(),
+				rangeTest = document.createRange(),
+				result = {done:false,value:null},
+				TIMEDOUT = false,
+				round = function(x){
+					return Math.round(x * 100) / 100;
+				},
+				cleanup = function(){
+					rangeControl.detach && rangeControl.detach();
+					rangeTest.detach && rangeTest.detach();
+					hiddenParent.removeChild(control);
+					hiddenParent.removeChild(test);
+				};
+			control.textContent = "AYE";
+			test.textContent = "AYE";
+			control.style.fontFamily = "UnknownTestFont";
+			rangeControl.setStart(control.firstChild,0);
+			rangeControl.setEnd(control.firstChild,3);
+			rangeTest.setStart(test.firstChild,0);
+			rangeTest.setEnd(test.firstChild,3);
+			this.watchman(
+				this,
+				function(counter){
+					var controlRect,
+						testRect;
+					if (!(++counter.counter % freq)){
+						if (counter.counter >= timeout) {
+							TIMEDOUT = true;
+							return true;
+						}
+						controlRect = rangeControl.getBoundingClientRect();
+						testRect = rangeTest.getBoundingClientRect();
+						return (round(controlRect.width) !==  round(testRect.width)) || (round(controlRect.height) !==  round(testRect.height));
+					}
+				},
+				function(counter){
+					result.done = true;
+					if (TIMEDOUT) {
+						result.value = new Error("Font detection timedout.");
+					} else {
+						result.value = true;
+					}
+					cleanup();
+				},
+				{counter:-1}
+			);
+			return this.async(result);
+		};
+		/*
+		###############################
+		###########FONTCHECK###########
 		###############################
 		*/
 		return LexiconMonoSeq;
