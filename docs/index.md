@@ -16,6 +16,10 @@ layout: post
 
 *LexiconMonoSeq* is a multiple sequence alignment viewer ([MSA](https://en.wikipedia.org/wiki/Multiple_sequence_alignment)) that works with *monospace* fonts. You can use this tool for showing any arbitrary number of strings as well. The library renders DOM Text asynchronously.
 
+## Disclaimer
+
+Be careful when proving optional parameters `duration` and `durationPaint` for LexiconMonoSeq as low values (< 300ms) can elicit epileptic seizures to susceptible individuals. Follow the guidelines provided here: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#seizure
+
 ## Dependencies
 
 None.
@@ -219,7 +223,7 @@ instance.registerType(
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/clustalW.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/clustalW.html)
 
-You can also read clustal.wl files if you provide them to *LexiconMonoSeq* as a string:
+You can read clustal.wl files if you provide them to *LexiconMonoSeq* as a string:
 
 ```JavaScript
 instance.update(LexiconMonoSeq.readClustal(String))
