@@ -82,6 +82,8 @@ Include the tag either within `body` or `head`, synchronous or asynchronous, acc
 
 ## A word about the fonts
 
+> **Note:** As of version 0.18.0, I highly recommend using `isFontLoaded` method 
+
 *LexiconMonoSeq* works with [monospace fonts](https://en.wikipedia.org/wiki/Monospaced_font) only, since fixed width characters are desired for proper alignment. Nonetheless, due to vender differences in font rendering, a few millipixel shift is normal.
 
 You can use your custom monospace fonts, but make sure they are properly loaded before you create an instance. If the fonts are loaded later or you changed them, invoke the `reDraw` method of the instace to recalculate styles:
@@ -102,7 +104,15 @@ Do this:
 ```JavaScript
 LexiconMonoSeq("#test",{parallelRendering:5}).skipFrames(30).then(function(){this.update(yourDataSet,{durationPaint:500,duration:500})}).then(...
 ```
-Above will skip 30 frames (considering 60 frames = 1 second) and then update, giving browser to correctly render the custom font.
+Or even better:
+
+```JavaScript
+LexiconMonoSeq("#test",{parallelRendering:5}).isFontLoaded(200,2000).then(function(){this.update(yourDataSet,{durationPaint:500,duration:500})}).then(...
+```
+
+First one will skip 30 frames (considering 60 frames = 1 second) and then update, giving browser to correctly render the custom font.
+
+Second one will wait until the font is loaded and then render. But if the loading takes more than 2000ms (2 seconds), it will return an error instead.
 
 ## Examples
 
@@ -399,7 +409,7 @@ Each of them returns a thenable that can be chained:
 instance.async(function...).then(function...).skipFrames(50).then(function...).catch(function...)
 ```
 
-Async operations do not require a polyfill and are written in ES5, they resemble much like promises. Each function inside a thenable is passed the reeturn value of the other function. However there are some catches:
+Async operations do not require a polyfill and are written in ES5, they resemble much like promises. Each function inside a thenable is passed the return value of the other function. However there are some catches:
 
 - If the return value inside a function is a primitive it is wrapped with an object of form `{value:your primitive,done:false}`. The next function in the chain grabs the value by accessing value, you do NOT have to extract it:
 
