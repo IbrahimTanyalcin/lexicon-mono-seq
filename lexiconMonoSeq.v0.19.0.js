@@ -107,7 +107,7 @@
 		##############PROTO############
 		###############################
 		*/
-		_LexiconMonoSeq.prototype.version = "0.18.0";
+		_LexiconMonoSeq.prototype.version = "0.19.0";
 		_LexiconMonoSeq.prototype._scrollLeftOffset = 0;
 		_LexiconMonoSeq.prototype._50spaces = "                                                  ";
 		_LexiconMonoSeq.prototype.set = function(k,v){
@@ -1374,6 +1374,7 @@
 						? argObj
 						: {value:argObj,done:true};
 			return {
+				_instance: that.skipFrames,
 				_parent: parent,
 				_invoked: false,
 				_child: null,
@@ -1388,6 +1389,14 @@
 					that.watchman(
 						that,
 						function(nFrames){
+							if(argObj.value && argObj.value._instance === that.skipFrames) {
+								if(!argObj.value._invoked) {
+									argObj.value.then(function(x){
+										argObj.value = x;
+									});
+								}
+								return false;
+							}
 							return argObj.done && nFrames.decrement() <= 0;
 						},
 						function(){
@@ -1465,7 +1474,7 @@
 			return this;
 		};
 		_LexiconMonoSeq.prototype.async = function(o){
-			return this.skipFrames(1,typeof o === "function" ? o() : o);
+			return this.skipFrames(1,typeof o === "function" ? o.call(this) : o);
 		};
 		_LexiconMonoSeq.prototype.quirks = {
 			busy:false,

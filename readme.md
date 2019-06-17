@@ -37,7 +37,6 @@ In truth this small script is a ascii animation framework that comes with perfor
 ![example8](./images/example8.gif)
 
 
-
 ## Usage
 ```JavaScript
 LexiconMonoSeq(
@@ -58,69 +57,31 @@ LexiconMonoSeq(
     }
 ]);
 ```
-## Loading the script
-
-*LexiconMonoSeq* supports [*UMD*](https://github.com/umdjs/umd). Use a derivate of the below link, based on the version you want:
-
-`<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/lexiconMonoSeq.v0.16.0.js"></script>`
-
-Above link can change if a new release is published. You can try adding the repo version (0.16.0 etc.):
-
-`<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq@[version]/lexiconMonoSeq.v[version].js"></script>`
-
-For example:
-
-> Npm
-
-`<script src="https://cdn.jsdelivr.net/npm/lexicon-mono-seq@1.2.5/lexiconMonoSeq.v0.17.3.js"></script>`
-
-> Github
-
-`<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq@0.16.0/lexiconMonoSeq.v0.16.0.js"></script>`
-
-Alternatively you can requests all versions from here:
-
-`<script src="https://distreau.com/lexicon-mono-seq/js/lexiconMonoSeq.v0.16.0.js"></script>`
-
-Include the tag either within `body` or `head`, synchronous or asynchronous, according to your page's desing needs.
-
-## A word about the fonts
-
-> **Note:** As of version 0.18.0, I highly recommend using `isFontLoaded` method 
-
-*LexiconMonoSeq* works with [monospace fonts](https://en.wikipedia.org/wiki/Monospaced_font) only, since fixed width characters are desired for proper alignment. Nonetheless, due to vender differences in font rendering, a few millipixel shift is normal.
-
-You can use your custom monospace fonts, but make sure they are properly loaded before you create an instance. If the fonts are loaded later or you changed them, invoke the `reDraw` method of the instace to recalculate styles:
-
-```JavaScript
-instace.reDraw();
-```
-
-If you really wanna be on the safe side for both Mac and Windows, use *Courier New* font. 
-
-If you load your custom fonts with `@import`, `@font-face` or `link` etc., give a small break after you create an instance, to allow browser calculations to kick-in. This time is possibly vendor dependent and usually a tick (~17ms) is sufficient. So instead of:
-
-```JavaScript
-LexiconMonoSeq("#test",{parallelRendering:5}).update(yourDataSet,{durationPaint:500,duration:500})
-```
-Do this:
-
-```JavaScript
-LexiconMonoSeq("#test",{parallelRendering:5}).skipFrames(30).then(function(){this.update(yourDataSet,{durationPaint:500,duration:500})}).then(...
-```
-Or even better:
-
-```JavaScript
-LexiconMonoSeq("#test",{parallelRendering:5}).isFontLoaded(200,2000).then(function(){this.update(yourDataSet,{durationPaint:500,duration:500})}).then(...
-```
-
-First one will skip 30 frames (considering 60 frames = 1 second) and then update, giving browser to correctly render the custom font.
-
-Second one will wait until the font is loaded and then render. But if the loading takes more than 2000ms (2 seconds), it will return an error instead.
 
 ## Examples
 
-### 1 1000 X 10000 Random Sequences
+### 1 Reading Clustal.wl Files
+![example6](./images/example6.gif)
+
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/clustalW.html)
+> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/clustalW.html)
+
+You can read clustal.wl files if you provide them to *LexiconMonoSeq* as a string:
+
+```JavaScript
+instance.update(LexiconMonoSeq.readClustal(String))
+```
+### 2 ~10 Million Bases (0-1Mb/1-2Mb) of Chromosome X with 3 Possible Amino Acid Frameshifts
+![example7](./images/example7.gif)
+
+> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/chrX10Mb.html)
+> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/chrX10Mb.html)
+
+Passing the optional `posOffset` shifts a given sequence to the right 1 unit char. This means if a sequence has `charWidth` of 10 and `posOffset` is 1, it is shifted 0.1 chars compared to its `charWidth`. This allows you to control track position of which you can't achive by adding spaces to the left. This property is useful if you are going to align DNA with amino acids or tracks with different `charWidth`.
+
+The above example displays the first million bases of chromosomeX with 3 possible frames of amino acids.
+
+### 3 1000 X 10000 Random Sequences
 
 ![example1](./images/example1.gif)
 
@@ -140,7 +101,7 @@ instance.update(obj,{durationPaint:500});
 ```
 The second argument above are additional options which you can pass to *LexiconMonoSeq*.
 
-### 2 Dynamic Updates of Sequences
+### 4 Dynamic Updates of Sequences
 
 ![example2](./images/example2.gif)
 
@@ -149,7 +110,8 @@ The second argument above are additional options which you can pass to *LexiconM
 
 You do not have to instantiate a new version each time your object changes, you can repeteadly call <code>update</code> method to redraw sequences. Things to be removed/added/changed are arranged automatically.
 
-### 3 First 10 Million Digits of PI to Letters
+### 5 First 10 Million Digits of PI to Letters
+
 ![example3](./images/example3.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/PI10Million.html)
@@ -177,7 +139,7 @@ Info looks like:
 
 You can also use the <code>getInfoFromRect</code> method to receive sequences from minimal bounding region of a given *DOM Rect* or *Object* with `top`,`left`,`width` and `height` properties supplied by the user.
 
-### 4 Random Sequences + Random Smooth Scrolling
+### 6 Random Sequences + Random Smooth Scrolling
 ![example4](./images/example4.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/randomSequenceSmoothScroll.html)
@@ -190,7 +152,7 @@ instance.scrollToPos(Math.random()*10000,Math.random()*1000)
 ```
 Above would scroll to some random position along the map.
 
-### 5 Animating Ascii Art
+### 7 Animating Ascii Art
 ![example5](./images/example5.gif)
 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/asciiAnimation.html)
@@ -213,26 +175,6 @@ instance.registerType(
     "rgba(0,0,0,0.9)" //textColor
 );
 ```
-### 6 Reading Clustal.wl Files
-![example6](./images/example6.gif)
-
-> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/clustalW.html)
-> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/clustalW.html)
-
-You can read clustal.wl files if you provide them to *LexiconMonoSeq* as a string:
-
-```JavaScript
-instance.update(LexiconMonoSeq.readClustal(String))
-```
-### 7 ~10 Million Bases (0-1Mb/1-2Mb) of Chromosome X with 3 Possible Amino Acid Frameshifts
-![example7](./images/example7.gif)
-
-> #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/chrX10Mb.html)
-> #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/chrX10Mb.html)
-
-Passing the optional `posOffset` shifts a given sequence to the right 1 unit char. This means if a sequence has `charWidth` of 10 and `posOffset` is 1, it is shifted 0.1 chars compared to its `charWidth`. This allows you to control track position of which you can't achive by adding spaces to the left. This property is useful if you are going to align DNA with amino acids or tracks with different `charWidth`.
-
-The above example displays the first million bases of chromosomeX with 3 possible frames of amino acids.
 
 ### 8 Ascii Art Transitions
 ![example8](./images/example8.gif)
@@ -333,6 +275,66 @@ Since `fetch` returns an async thenable, you can always call `catch` method for 
 > #### [See script](https://github.com/IbrahimTanyalcin/lexicon-mono-seq/blob/master/examples/asyncFetch.html)
 > #### [Run Example](https://distreau.com/lexicon-mono-seq/examples/asyncFetch.html)
 
+## Loading the script
+
+*LexiconMonoSeq* supports [*UMD*](https://github.com/umdjs/umd). Use a derivate of the below link, based on the version you want:
+
+`<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq/lexiconMonoSeq.v0.16.0.js"></script>`
+
+Above link can change if a new release is published. You can try adding the repo version (0.16.0 etc.):
+
+`<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq@[version]/lexiconMonoSeq.v[version].js"></script>`
+
+For example:
+
+> Npm
+
+`<script src="https://cdn.jsdelivr.net/npm/lexicon-mono-seq@1.2.5/lexiconMonoSeq.v0.17.3.js"></script>`
+
+> Github
+
+`<script src="https://cdn.jsdelivr.net/gh/IbrahimTanyalcin/lexicon-mono-seq@0.16.0/lexiconMonoSeq.v0.16.0.js"></script>`
+
+Alternatively you can requests all versions from here:
+
+`<script src="https://distreau.com/lexicon-mono-seq/js/lexiconMonoSeq.v0.16.0.js"></script>`
+
+Include the tag either within `body` or `head`, synchronous or asynchronous, according to your page's desing needs.
+
+## A word about the fonts
+
+> **Note:** As of version 0.18.0, I highly recommend using `isFontLoaded` method 
+
+*LexiconMonoSeq* works with [monospace fonts](https://en.wikipedia.org/wiki/Monospaced_font) only, since fixed width characters are desired for proper alignment. Nonetheless, due to vender differences in font rendering, a few millipixel shift is normal.
+
+You can use your custom monospace fonts, but make sure they are properly loaded before you create an instance. If the fonts are loaded later or you changed them, invoke the `reDraw` method of the instace to recalculate styles:
+
+```JavaScript
+instace.reDraw();
+```
+
+If you really wanna be on the safe side for both Mac and Windows, use *Courier New* font. 
+
+If you load your custom fonts with `@import`, `@font-face` or `link` etc., give a small break after you create an instance, to allow browser calculations to kick-in. This time is possibly vendor dependent and usually a tick (~17ms) is sufficient. So instead of:
+
+```JavaScript
+LexiconMonoSeq("#test",{parallelRendering:5}).update(yourDataSet,{durationPaint:500,duration:500})
+```
+Do this:
+
+```JavaScript
+LexiconMonoSeq("#test",{parallelRendering:5}).skipFrames(30).then(function(){this.update(yourDataSet,{durationPaint:500,duration:500})}).then(...
+```
+Or even better:
+
+```JavaScript
+LexiconMonoSeq("#test",{parallelRendering:5}).isFontLoaded(200,2000).then(function(){this.update(yourDataSet,{durationPaint:500,duration:500})}).then(...
+```
+
+First one will skip 30 frames (considering 60 frames = 1 second) and then update, giving browser to correctly render the custom font.
+
+Second one will wait until the font is loaded and then render. But if the loading takes more than 2000ms (2 seconds), it will return an error instead.
+
 ## Creating an instance
 
 > LexiconMonoSeq ( *container_ID_String_Or_Node_Reference* [ , *options* ] )
@@ -420,7 +422,7 @@ instance
 });
 ```
 
-- If the return value is of the form `{value:..,done:..}`, then the next function will not execute until `done:true` is observed. If frames are skipped in between, they will not start decrementing until `done:true` is observed as well:
+- If the return value is of the form `{value:..,done:..}`, then the next function will not execute until `done:true` is observed. This is called the **OBSERVER PATTERN**. If frames are skipped in between, they will not start decrementing until `done:true` is observed as well:
 
 ```JavaScript
 instance
@@ -437,7 +439,28 @@ instance
     console.log(retValue); //waits 1000ms, then waits 120 frames (~2000ms) and finally logs 10. 
 });
 ```
+As of version 0.19.0, async operations even get better, almost identical to how Promises work:
 
+```JavaScript
+instance.async(function(){
+	return this.skipFrames(60).then(function(){return 5;});
+}).then(function(x){
+	return x+1; //6
+});
+```
+OR
+
+```JavaScript
+instance.async(function(){
+	return this.fetch("some url...","json");
+}).then(function(json){
+	return this.isFontLoaded(200).then(function(){return json;});
+}).then(function(json){
+	this.update(json);
+});
+```
+
+This means that you can directly return an async operator inside an already async operator, and the next thenable will be assigned accordingly. You might already be familiar with this concept from the `Promises` ES6, if you still wish you can always revert to the observer pattern, whichever suits your style.
 
 ## Updating data
 
@@ -448,6 +471,7 @@ Data is an array of Object 's which each have at LEAST 3 properties:
 - name: a String that will be the name of the sequence such as "Sequence-1"
 - type: a registered type, default types are "aa" (amino acid), "dna" (DNA), "ruler", "alphabet" and "number". You can register new types by using the <code>registerType</code> method.
 - charWidth: **OPTIONAL**. Controls how wide the characters are, for instance a value of 5 means each char will be 5 characters wide.
+- posOffset: **OPTIONAL**. Offsets the sequence row by n characters, even if your charWidth is 3 for instance, a posOffset of 1 would offset the row by 1/3 chars. This is useful for denoting [frameshifts](https://distreau.com/lexicon-mono-seq/examples/chrX10Mb.html).
 
 Options are similar to [Creating an instance](#creating-an-instance), **EXCEPT** that the following **CANNOT** be used:
 
@@ -457,6 +481,42 @@ Options are similar to [Creating an instance](#creating-an-instance), **EXCEPT**
 - parallelRendering
 
 When no options are given, previous options if any are used. A new option overrides the older ones.
+
+## Reading Remote Clustal Files
+
+Lexicon.readClustal reads a string, so first you need fetch it from the server:
+
+```JavaScript
+instance.async(function(){
+    return this.fetch("someURL/clustal.txt");
+}).then(function(text){
+    this.update(
+        LexiconMonoSeq.createRuler(
+            LexiconMonoSeq.readClustal(text),
+            true
+        )
+    );
+});
+```
+This example reads about ~100Mb of Clustal file: https://distreau.com/lexicon-mono-seq/test/lexiconMonoSeq.html
+
+Make sure that the remote host is returning `Access-Control-Allow-Origin` header with value of "*" so that you can access it.
+
+## Reading JSON Files
+
+Similarly like reading clustal files:
+
+```JavaScript
+instance.async(function(){
+	return this.fetch("some url...","json");
+}).then(function(json){
+	this.update(json);
+});
+```
+
+Here is a jsFiddle: https://jsfiddle.net/ibowankenobi/apjcxq1w/
+
+Make sure that the remote host is returning `Access-Control-Allow-Origin` header with value of "*" so that you can access it.
 
 ## Static Methods
 
@@ -554,6 +614,37 @@ div.LexiconMonoSeq.wrapper.custom {
 ## Extending LexiconMonoSeq
 
 The inner constructor is not exposed, if you want to attach new methods directly attach it on the `LexiconMonoSeq`.
+
+## Performance 
+
+To give a clue about rendering performance, this library has been compared with a canvas based alternative, MSAViewer. Tests were performed on i7-2.7GHz-CPU/16GB-RAM/GeForce-GTX-950M with 64-bit OS.
+
+| *max/min fps* | Chrome | Firefox 
+ --- | --- | --- 
+Lexicon-Mono-Seq | ~55 | 57/27
+MSAViewer | ~30 | 53/13
+
+The test html files and their respective profiles are located and indexed here: https://distreau.com/lexicon-mono-seq/test/
+
+You can also live test them:
+
+- https://jsfiddle.net/ibowankenobi/apjcxq1w/
+- https://jsfiddle.net/ibowankenobi/s97g4vxa/
+
+It is very important that the purpose of this comparison is not measure which approach (DOM vs canvas) is faster. Given the GPU advantage available probably pixel based rendering will always have an edge, however the purpose is to show that DOM based alternatives can have viable performance too.
+
+## Remedies
+
+In certain situations you might want to tweak your css a bit to overcome vendor related bugs.
+
+- iOS automatic font zoom will distort the aligment as DOMText has to match properly on the background svg rectangles, to overcome this issue:
+
+```Css
+.LexiconMonoSeqContainer .LexiconMonoSeq.wrapper.custom {
+	text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+}
+```
 
 ## TODO(s)
 
