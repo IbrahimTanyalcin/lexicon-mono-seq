@@ -38,7 +38,7 @@ Several MSA viewers rely on rendering characters as an image using the *canvas* 
 At its core *Lexicon-Mono-Seq* is a monospace font ASCII character animation framework and comes with its own pre-baked easing functions, much like [CSS Cubic Bezier](https://developer.mozilla.org/en-US/docs/Web/CSS/timing-function) functions, these provide customizable and cached timing points for animations. Other fields such as creative coding or data visualization can use *Lexicon-Mono-Seq* for transitioning between ASCII maps or large heatmaps.
 
 With minimal technical debt (no dependencies), the library uses [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) (rAF) to asynchronously render blocks of sequences with the desired animation, duration and node limit.
-The library is about 50kB (as of version 0.18.0) minimized and does not need any transpiling to use in older browsers that do not support ES6 [@TC39].
+The library is about 50kB (as of version 0.19.0) minimized and does not need any transpiling to use in older browsers that do not support ES6 [@TC39].
 The amount of sequences is limited to your browsers capacity, recommended limit is 1000 sequences with 100000 letters each for commodity laptops/mobile devices.
 
 *Lexicon-Mono-Seq* is suitable for developers who only want the functionality of a minimal MSA Viewer but desire to design their own interface around it. The script provides several utility functions that can be hooked to custom buttons as desired [@Npm;@GitHub].
