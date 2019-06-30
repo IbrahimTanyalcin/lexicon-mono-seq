@@ -651,6 +651,19 @@ In certain situations you might want to tweak your css a bit to overcome vendor 
 - Currently the `fontWidth` getter/setter returns live values from the `Range` object, which changes with `CSS transform`. This causes applet svgs to missalign when parent is transformed ( for instance, if parent is scaled by 0.5, svgs get scaled by 0.25 because `fontWidth` returns half the values ). One solution could be to add a new getter/setter that multiplies transformation matrix with its inverse.
 - For very very tiny font sizes, we need to adjust font size dynamically for chrome or other browsers who similarly uses pixel rounding. For instance if a font size is specified as 8 and the bounding rect width for that is 4.46 pixels, we need to iteratively search for font sizes around 8 that yields a single decimal instead.
 
+## CONTRIBUTING
+
+- Use tabs for indentation (4 spaces)
+- PRs fall into 3 categories: 
+   - Bug Reports
+   - Features
+   - Performance/Optimization
+- State in the comment which category it falls into.
+- Describe briefly what is to be changed, and how the new change alters previous behavior
+- If you are going to use eslint/js-beautify use the corresponding [eslintrc.json](./.eslintrc.json) and [jsbeautifyrc.json](./.jsbeautifyrc.json) templates included in this repository. 
+- Before creating the PR, test your version of the script with examples included in this repo, make sure no errors are thrown in the console.
+- If you are going to add static methods, extend directly `LexiconMonoSeq`, otherwise add it to the prototype of `_LexiconMonoSeq`.
+
 ## Questions
 
 You can contact me by opening an issue or twitter: **@ibrhmTanyalcin**

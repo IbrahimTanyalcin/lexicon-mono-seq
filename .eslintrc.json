@@ -1,0 +1,18 @@
+{
+    "extends": "eslint:recommended",
+	 "env": {
+        "browser": true,
+        "node": false
+    },
+	  "globals": {
+    },
+	  "rules": {
+		"no-console": "off",
+		"no-inner-declarations": "off",
+        "no-redeclare": "off",	
+		"no-unused-vars": "off",
+		"no-fallthrough": "off",
+		"no-empty": "off",
+		"no-undef": "off"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "js": {
+		"end-with-newline": true,
+		"indent_with_tabs": true,
+		"break_chained_methods": true,
+		"wrap_line_length": 80
+	}
+}
