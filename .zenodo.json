@@ -1,0 +1,26 @@
+{
+    "description": "Lexicon-Mono-Seq is an MSA viewer specially designed for browsers that use native DOM Text + SVG", 
+    "license": "MIT License", 
+    "title": "Lexicon-Mono-Seq, DOM Text Based Async MSA Viewer", 
+    "version": "v0.19.0", 
+    "upload_type": "software", 
+    "publication_date": "2019-07-08", 
+    "creators": [
+        {
+            "name": "Ibrahim Tanyalcin"
+        }
+    ], 
+    "access_right": "open", 
+    "related_identifiers": [
+        {
+            "scheme": "url", 
+            "identifier": "https://github.com/IbrahimTanyalcin/lexicon-mono-seq/tree/v0.19.0", 
+            "relation": "isSupplementTo"
+        }, 
+        {
+            "scheme": "doi", 
+            "identifier": "10.5281/zenodo.2636839", 
+            "relation": "isVersionOf"
+        }
+    ]
+}
